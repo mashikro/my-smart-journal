@@ -17,7 +17,7 @@ class User(db.Model):
     fname = db.Column(db.String(50), nullable=False )
     lname = db.Column(db.String(50), nullable=False)
     email = db.Column(db.String(100), unique= True, nullable=False)
-    password_hash = db.Column(db.String(1000), nullable=False) #not sure how long this will be yet
+    password_hash = db.Column(db.Text, nullable=False) #not sure how long this will be yet
     phone_number = db.Column(db.String(30), nullable=False)
     texting_enabled = db.Column(db.Boolean, nullable=False)
 
