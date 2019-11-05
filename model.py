@@ -1,7 +1,10 @@
 ##############CREATING TO DATABASE############################
 from flask_sqlalchemy import SQLAlchemy
-import correlation
-from collections import defaultdict
+from flask import Flask
+import datetime
+
+# from collections import defaultdict
+
 db = SQLAlchemy()
 
 ####################MODEL DEFINITIONS##########################
@@ -13,7 +16,7 @@ class User(db.Model):
     user_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     fname = db.Column(db.String(50), nullable=False )
     lname = db.Column(db.String(50), nullable=False)
-    email = db.Column(db.String(100), nullable=False)
+    email = db.Column(db.String(100), unique= True, nullable=False)
     password_hash = db.Column(db.String(1000), nullable=False) #not sure how long this will be yet
     phone_number = db.Column(db.String(15), nullable=False)
     texting_setting = db.Column(db.Boolean, nullable=False)
@@ -24,16 +27,11 @@ class Journal_Ent(db.Model):
     __tablename__ = 'j_entries'
 
     entry_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey('users.user_id'))
-    date = db.Column()
-    entry_type = db.Column()
-    text = db.Column()
-    happ_score = db.Column()
-
-
-
-
-
+    user_id = db.Column(db.Integer, db.ForeignKey('users.user_id'), nullable=False)
+    date = db.Column(db.Datetime(timezone=False), nullable=False) #confirm timezone=False
+    entry_type = db.Column(db.String(10), nullable=False)
+    text = db.Column(db.Text, nullable=False)
+    happ_score = db.Column(db.Integer, nullable=False)
 
 
 ##############CONNECTING TO DATABASE##########################
@@ -42,7 +40,7 @@ def connect_to_db(app):
     """Connect the database to our Flask app."""
 
     # Configure to use our PostgreSQL database
-    app.config['SQLALCHEMY_DATABASE_URI'] = #DO THIS 'postgresql:///MY DB'
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql:///journals'
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     app.config['SQLALCHEMY_ECHO'] = True
     db.app = app
