@@ -27,7 +27,7 @@ def index():
 @app.route('/create-account', methods=['GET'])
 def create_account_form():
 
-    return '<html> registration form </html>'
+    return render_template('create_account.html')
 
 
 @app.route('/create-account', methods=['POST'])
