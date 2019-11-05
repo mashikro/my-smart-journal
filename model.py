@@ -1,7 +1,7 @@
 ##############CREATING TO DATABASE############################
 from flask_sqlalchemy import SQLAlchemy
 from flask import Flask
-import datetime
+# import datetime
 
 # from collections import defaultdict
 
@@ -18,21 +18,30 @@ class User(db.Model):
     lname = db.Column(db.String(50), nullable=False)
     email = db.Column(db.String(100), unique= True, nullable=False)
     password_hash = db.Column(db.String(1000), nullable=False) #not sure how long this will be yet
-    phone_number = db.Column(db.String(15), nullable=False)
-    texting_setting = db.Column(db.Boolean, nullable=False)
+    phone_number = db.Column(db.String(30), nullable=False)
+    texting_enabled = db.Column(db.Boolean, nullable=False)
 
-class Journal_Ent(db.Model):
+    def __repr__(self):
+        """Provide helpful representation when printed."""
+
+
+
+class JournalEntry(db.Model):
     '''All user's journal entries will live here'''
 
-    __tablename__ = 'j_entries'
+    __tablename__ = 'journal_entries'
 
     entry_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('users.user_id'), nullable=False)
-    date = db.Column(db.DateTime(timezone=False), nullable=False) #confirm timezone=False
+    date = db.Column(db.Date, nullable=False) #confirm timezone=False OR change to db.Date()
     entry_type = db.Column(db.String(10), nullable=False)
     text = db.Column(db.Text, nullable=False)
     happ_score = db.Column(db.Integer, nullable=False)
 
+    user = db.relationship('User', backref='journal_entries') #should i make it entries because its one to many?
+
+    def __repr__(self):
+        """Provide helpful representation when printed."""
 
 ##############CONNECTING TO DATABASE##########################
 
