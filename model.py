@@ -28,7 +28,7 @@ class Journal_Ent(db.Model):
 
     entry_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('users.user_id'), nullable=False)
-    date = db.Column(db.Datetime(timezone=False), nullable=False) #confirm timezone=False
+    date = db.Column(db.DateTime(timezone=False), nullable=False) #confirm timezone=False
     entry_type = db.Column(db.String(10), nullable=False)
     text = db.Column(db.Text, nullable=False)
     happ_score = db.Column(db.Integer, nullable=False)
