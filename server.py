@@ -15,6 +15,15 @@ app.secret_key = "ilovedogs" #CHANGE THIS AT SOME POINT
 
 app.jinja_env.undefined = StrictUndefined #to prevent silent but deadly jinja errors
 
+######################### HELPER FUNCTIONS ##############################
+def encrypt_pass(password):
+    '''Encrypts passwords using bcrypt'''
+    
+    b = password.encode('utf-8') # turns password str to b str
+    safe_password = bcrypt.hashpw(b, bcrypt.gensalt())
+
+    return safe_password
+
 ######################### ROUTES #####################################
 @app.route('/') # this will be where you can got to log in / create account
 def index():
@@ -34,13 +43,14 @@ def create_account_form():
 def create_user_process():
     '''User is able to create an account'''
 
-# Will get all this info back:
-    # email
-    # password (bcrypt.hashpw(b'', bcrypt.gensalt()))
-    # fname
-    # lname
-    # phone_num
-    # texting_enabled
+    # Will get all this info back:
+    email = request.form.get('email')
+    password = encrypt_pass(request.form.get('password'))
+    print('LOOOOOOOOK:',password)
+    fname = request.form.get('fname')
+    lname = request.form.get('lname')
+    phone_num = request.form.get('phone-number')
+    texting_enabled = request.form.get('texting_enabled')
 
 #Instatitate a new user add and commit them to db
     # new_user = User()
@@ -48,7 +58,7 @@ def create_user_process():
     # db.session.add(new_user)
     # db.session.commit()
  
-    return '<html><body>I WANT you to be a user</body></html>'
+    return redirect('/login')
 
 @app.route('/login', methods=['GET'])
 def login_form():
@@ -85,7 +95,7 @@ def login_process():
 # Will have a flash message
     # flash("Welcome back! We missed you <3")
 
-    # return redirect('/home')
+    return redirect('/home')
 
 @app.route('/logout')
 def logout_process():
