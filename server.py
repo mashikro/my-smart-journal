@@ -25,7 +25,7 @@ def encrypt_pass(password):
     return safe_password
 
 ######################### ROUTES #####################################
-@app.route('/') # this will be where you can got to log in / create account
+@app.route('/') 
 def index():
     '''Index. User can either 'create an account' or 'login here' '''
     
@@ -46,14 +46,20 @@ def create_user_process():
     # Will get all this info back:
     email = request.form.get('email')
     password = encrypt_pass(request.form.get('password'))
-    print('LOOOOOOOOK:',password)
+    # print('LOOOOOOOOK:',password)
     fname = request.form.get('fname')
     lname = request.form.get('lname')
     phone_num = request.form.get('phone-number')
     texting_enabled = request.form.get('texting_enabled')
 
 #Instatitate a new user add and commit them to db
-    # new_user = User()
+    new_user = User(email=email, 
+                    password=password, 
+                    fname=fname, 
+                    lname=lname, 
+                    phone_num=phone_num, 
+                    texting_enabled=texting_enabled, 
+                    password_hash=password)
 
     # db.session.add(new_user)
     # db.session.commit()
