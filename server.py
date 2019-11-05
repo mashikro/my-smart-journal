@@ -4,7 +4,7 @@ from jinja2 import StrictUndefined
 from flask import Flask, render_template, request, redirect 
 from flask_debugtoolbar import DebugToolbarExtension
 
-from model import connect_to_db, db
+from model import connect_to_db, db, User, JournalEntry
 
 import bcrypt
  
@@ -19,7 +19,7 @@ app.jinja_env.undefined = StrictUndefined #to prevent silent but deadly jinja er
 def encrypt_pass(password):
     '''Encrypts passwords using bcrypt'''
     
-    b = password.encode('utf-8') # turns password str to b str
+    b = password.encode('utf-8') # turning things to b str: b = mystring.encode('utf-8')
     safe_password = bcrypt.hashpw(b, bcrypt.gensalt())
 
     return safe_password
@@ -45,24 +45,22 @@ def create_user_process():
 
     # Will get all this info back:
     email = request.form.get('email')
-    password = encrypt_pass(request.form.get('password'))
-    # print('LOOOOOOOOK:',password)
+    password_hash = encrypt_pass(request.form.get('password'))
     fname = request.form.get('fname')
     lname = request.form.get('lname')
-    phone_num = request.form.get('phone-number')
-    texting_enabled = request.form.get('texting_enabled')
+    phone_number = request.form.get('phone_number')
+    texting_enabled = bool(request.form.get('texting_enabled'))
 
 #Instatitate a new user add and commit them to db
     new_user = User(email=email, 
-                    password=password, 
+                    password_hash=password_hash, 
                     fname=fname, 
                     lname=lname, 
-                    phone_num=phone_num, 
-                    texting_enabled=texting_enabled, 
-                    password_hash=password)
+                    phone_number=phone_number, 
+                    texting_enabled=texting_enabled)
 
-    # db.session.add(new_user)
-    # db.session.commit()
+    db.session.add(new_user)
+    db.session.commit()
  
     return redirect('/login')
 
@@ -76,31 +74,33 @@ def login_form():
 @app.route('/login', methods=['POST'])
 def login_process():
     '''Authenticate user'''
+
 # Will get this info back
-    # email
-    # password (bcrypt.checkpw(password, hashed))
-
-    # turning things to b str: b = mystring.encode('utf-8')
-
-
+    email = request.form.get('email')
+    password = request.form.get('password')
+    # b_password = password.encode('utf-8')
 
 # Will query for the user with this email (emails are unique)
-    # user = User.query.filter_by(email=email).first()
+    user = User.query.filter_by(email=email).first()
+    print('LOOOOOOOK', user)
+    print('HASSSSSSSSH', user.password_hash)
+    print('DOES IT MATCHHHHHH', password.encode('utf-8'))
 
 #User authentication
-    # if not user:
-    #     flash("Sorry, the user with that email doesn't exist. Please try again :)")
-    #     return redirect("/login")
+    if not user:
+        flash("Sorry, the user with that email doesn't exist. Please try again :)")
+        return redirect("/login")
 
     # if user.password != password:
-    #     flash("Oops :0 Incorrect password! Please try again :)")
-    #     return redirect("/login")
+    if not (bcrypt.checkpw(password.encode('utf-8'), user.password_hash)): #this checks if the entered pass matches decrypted pass_hash
+        flash("Oops :0 Incorrect password! Please try again :)")
+        return redirect("/login")
 
 # Will add user to session
-    # session["user_id"] = user.user_id
+    session["user_id"] = user.user_id
 
 # Will have a flash message
-    # flash("Welcome back! We missed you <3")
+    flash("Welcome! We missed you <3")
 
     return redirect('/home')
 
@@ -108,15 +108,15 @@ def login_process():
 def logout_process():
     '''Log user out'''
 
-    # del session["user_id"] # delete session
-    # flash("See you soon:) You are now logged out.")
-    # return redirect("/") #root
+    del session["user_id"] # delete session
+    flash("See you soon:) You are now logged out.")
+    return redirect("/") #root
 
 @app.route('/home', methods=['GET'])
 def show_homepage():
     '''Homepage. User's can make entries to the journal here '''
 
-    return '<html><body>homepage</body></html>'
+    return '<html><body>YAY YOU MADE IT HERE</body></html>'
 
 @app.route('/home', methods=['POST'])
 def process_journal_entry():
