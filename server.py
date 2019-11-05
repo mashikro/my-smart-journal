@@ -36,7 +36,7 @@ def index():
 @app.route('/create-account', methods=['GET'])
 def create_account_form():
 
-    return render_template('create_account.html')
+    return render_template('create_account_form.html')
 
 
 @app.route('/create-account', methods=['POST'])
@@ -69,7 +69,8 @@ def create_user_process():
 @app.route('/login', methods=['GET'])
 def login_form():
     '''Login form'''
-    pass
+    
+    return render_template('login_form.html')
 
 
 @app.route('/login', methods=['POST'])
