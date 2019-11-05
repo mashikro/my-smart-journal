@@ -5,6 +5,8 @@ from flask import Flask, render_template, request, redirect
 from flask_debugtoolbar import DebugToolbarExtension
 
 from model import connect_to_db, db
+
+import bcrypt
  
 #################### FLASK APP SET-UP ####################################
 app = Flask(__name__)
@@ -19,7 +21,7 @@ def index():
     '''Index. User can either 'create an account' or 'login here' '''
     
     #USE session to handle if it is a returning user to show create account vs login
-    return '<html><body>Hey this doesnt exist yet, but you will be able to login here</body></html>'
+    return render_template('index.html') 
 
 
 @app.route('/create-account', methods=['GET'])
@@ -34,7 +36,7 @@ def create_user_process():
 
 # Will get all this info back:
     # email
-    # password
+    # password (bcrypt.hashpw(b'', bcrypt.gensalt()))
     # fname
     # lname
     # phone_num
@@ -59,7 +61,11 @@ def login_process():
     '''Authenticate user'''
 # Will get this info back
     # email
-    # password
+    # password (bcrypt.checkpw(password, hashed))
+
+    # turning things to b str: b = mystring.encode('utf-8')
+
+
 
 # Will query for the user with this email (emails are unique)
     # user = User.query.filter_by(email=email).first()

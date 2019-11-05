@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My Smart Journal</title>
+</head>
+<body>
+
+{% for flash in get_flashed_messages() %}
+  {{ flash }}
+{% endfor %}
+
+{% block content %}
+  Put your body here.
+{% endblock %}
+
+
+
+
+</body>
+</html>
