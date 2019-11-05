@@ -1,7 +1,6 @@
 ##############CREATING TO DATABASE############################
 from flask_sqlalchemy import SQLAlchemy
 from flask import Flask
-# import datetime
 
 # from collections import defaultdict
 
@@ -24,6 +23,9 @@ class User(db.Model):
     def __repr__(self):
         """Provide helpful representation when printed."""
 
+        return '<User: email-{email} fname-{fname}>'.format(email=self.email, 
+                                                            fname=self.fname)
+
 
 
 class JournalEntry(db.Model):
@@ -42,6 +44,9 @@ class JournalEntry(db.Model):
 
     def __repr__(self):
         """Provide helpful representation when printed."""
+
+        return '<JournalEntry: date-{date} entry type-{entry_type}>'.format(date=self.date, 
+                                                                            entry_type=self.entry_type)
 
 ##############CONNECTING TO DATABASE##########################
 
