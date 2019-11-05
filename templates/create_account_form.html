@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>Create Account</h1>
+<form action='/create-account' method='POST'>
+
+    <div>
+        <label>
+            Email
+            <input type="email" name="email">
+        </label>
+    </div>
+    
+    <br>
+    
+    <div>
+        <label>
+            Password
+            <input type="password" name="password">
+        </label>
+    </div>
+    
+    <br>
+
+    <div>
+        <label>
+            First Name
+            <input type="text" name="fname">
+        </label>
+    </div>
+    
+    <br>
+
+    <div>
+        <label>
+            Last Name
+            <input type="text" name="lname">
+        </label>
+    </div>
+    
+    <br>
+
+    <div>
+        <label>
+            Phone Number
+            <input type="text" name="phone_number">
+        </label>
+    </div>
+
+    <br>
+
+    <div>
+        <label>
+            Enable Texting
+            <input type="radio" name="texting_enabled" value='True'>Yes
+            <input type="radio" name="texting_enabled" value='False'>No
+        </label>
+    </div>
+    
+    <br>
+    
+    <div>
+        <input type="submit" value="Submit">
+    </div>
+
+
+</form>
+
+{% endblock %}
