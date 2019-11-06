@@ -16,7 +16,7 @@ app.secret_key = "ilovedogs" #CHANGE THIS AT SOME POINT
 app.jinja_env.undefined = StrictUndefined #to prevent silent but deadly jinja errors
 
 ######################### HELPER FUNCTIONS ##############################
-def encrypt_pass(password):
+def encrypt_pass_bytes(password):
     '''Encrypts passwords using bcrypt'''
     b = password.encode('utf-8') # turning things to b str: b = mystring.encode('utf-8')
     password_hash = bcrypt.hashpw(b, bcrypt.gensalt())
@@ -43,11 +43,11 @@ def create_user_process():
 
     # Will get all this info back:
     email = request.form.get('email')
-    password_hash = encrypt_pass(request.form.get('password'))
+    password_hash = encrypt_pass_bytes(request.form.get('password'))
     fname = request.form.get('fname')
     lname = request.form.get('lname')
     phone_number = request.form.get('phone_number')
-    texting_enabled = bool(request.form.get('texting_enabled')) #fix 
+    texting_enabled = (request.form.get('texting_enabled') == 'true') #checks 'true' == 'true'
 
    
    
@@ -110,9 +110,9 @@ def login_process():
 def logout_process():
     '''Log user out'''
 
-    del session["user_id"] # delete session
-    flash("See you soon:) You are now logged out.")
-    return redirect("/") #root
+    # del session["user_id"] # delete session
+    # flash("See you soon:) You are now logged out.")
+    # return redirect("/") #root
 
 
 @app.route('/home', methods=['GET'])
