@@ -149,14 +149,20 @@ def process_journal_entry():
 @app.route('/history')
 def show_history():
     '''History of all entries'''
+
+    journal_entry = JournalEntry.query.filter_by(user_id=session['user_id']).all()
+    print('LOOOOOOOOK', journal_entry) #list of journal objects
     
-    return render_template('history_of_entries.html')
+    return render_template('history_of_entries.html', journal_entries_lst=journal_entry)
 
 
 @app.route('/view-entry')
 def show_single_entry():
     '''Single entry'''
-    pass
+
+    journal_entry = JournalEntry.query.filter_by(user_id=session['user_id']).all()
+
+    return render_template('single_entry_view.html')
 
 
 @app.route('/happy')

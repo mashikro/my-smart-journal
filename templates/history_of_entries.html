@@ -2,4 +2,15 @@
 {% block content %}
 <h1>History of Journal Entries</h1>
 
+<p>{{ journal_entries_lst }}</p>
+
+<ul>
+    {% for journal_entry in journal_entries_lst %}
+    <li> Date: {{ journal_entry.date }} </li>
+    <li> Type: {{ journal_entry.entry_type }}</li>
+    <li> <a href="/view-entry">Details</a> </li>
+    <br>
+    {% endfor %}
+</ul>
+
 {% endblock %}
