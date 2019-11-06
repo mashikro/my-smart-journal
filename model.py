@@ -50,8 +50,10 @@ class JournalEntry(db.Model):
     def __repr__(self):
         """Provide helpful representation when printed."""
 
-        return '<JournalEntry: date-{date} entry type-{entry_type}>'.format(date=self.date, 
-                                                                            entry_type=self.entry_type)
+        return '<JournalEntry: date-{date} entry_type-{entry_type} entry_id-{entry_id} user_email-{user_email}>'.format(date=self.date, 
+                                                                            entry_type=self.entry_type,
+                                                                            entry_id=self.entry_id,
+                                                                            user_email=self.user.email)
 
 ##############CONNECTING TO DATABASE##########################
 

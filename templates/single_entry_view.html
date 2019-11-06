@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Entry date: {{ single_journal_entry.date }}</h2>
+
+<h2>Entry type: {{ single_journal_entry.entry_type.title() }}</h2>
+
+
+
+
+<p>{{ single_journal_entry }}</p>
+
+
+{% endblock %}

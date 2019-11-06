@@ -90,7 +90,7 @@ def login_process():
     if bcrypt.checkpw((password.encode('utf-8')), user.password_hash): #this checks if the entered pass matches decrypted pass_hash
         # Will add user to session
         session["user_id"] = user.user_id
-        print('LOOOOOOOOK',session['user_id'])
+        # print('LOOOOOOOOK',session['user_id'])
 
         # Will have a flash message
         flash("Welcome! We missed you <3")
@@ -151,18 +151,22 @@ def show_history():
     '''History of all entries'''
 
     journal_entry = JournalEntry.query.filter_by(user_id=session['user_id']).all()
-    print('LOOOOOOOOK', journal_entry) #list of journal objects
+    # print('LOOOOOOOOK', journal_entry) #list of journal objects
     
     return render_template('history_of_entries.html', journal_entries_lst=journal_entry)
 
 
-@app.route('/view-entry')
-def show_single_entry():
+@app.route("/view-entry/<int:entry_id>")
+def show_single_entry(entry_id):
     '''Single entry'''
+    # checking if the correct entry_id is coming through
+    print('LOOOOOOOOOOOOOOK', entry_id)
 
-    journal_entry = JournalEntry.query.filter_by(user_id=session['user_id']).all()
+    single_journal_entry = JournalEntry.query.filter_by(entry_id=entry_id).first()
 
-    return render_template('single_entry_view.html')
+    print('LOOOOOOOOOOK AGAIN', single_journal_entry)
+
+    return render_template('single_entry_view.html', single_journal_entry=single_journal_entry)
 
 
 @app.route('/happy')
