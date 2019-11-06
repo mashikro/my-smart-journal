@@ -18,6 +18,7 @@ app.jinja_env.undefined = StrictUndefined #to prevent silent but deadly jinja er
 ######################### HELPER FUNCTIONS ##############################
 def encrypt_pass_bytes(password):
     '''Encrypts passwords using bcrypt'''
+   
     b = password.encode('utf-8') # turning things to b str: b = mystring.encode('utf-8')
     password_hash = bcrypt.hashpw(b, bcrypt.gensalt())
     return password_hash
@@ -27,7 +28,6 @@ def encrypt_pass_bytes(password):
 def index():
     '''Index. User can either 'create an account' or 'login here' '''
     
-    #USE session to handle if it is a returning user to show create account vs login
     return render_template('index.html') 
 
 
@@ -41,16 +41,13 @@ def create_account_form():
 def create_user_process():
     '''User is able to create an account'''
 
-    # Will get all this info back:
+# Will get all this info back:
     email = request.form.get('email')
     password_hash = encrypt_pass_bytes(request.form.get('password'))
     fname = request.form.get('fname')
     lname = request.form.get('lname')
     phone_number = request.form.get('phone_number')
     texting_enabled = (request.form.get('texting_enabled') == 'true') #checks 'true' == 'true'
-
-   
-   
 
 #Instatitate a new user add and commit them to db
     new_user = User(email=email, 
@@ -64,6 +61,7 @@ def create_user_process():
     db.session.commit()
  
     return redirect('/login')
+
 
 @app.route('/login', methods=['GET'])
 def login_form():
@@ -79,7 +77,6 @@ def login_process():
 # Will get this info back
     email = request.form.get('email')
     password = request.form.get('password')
-    # b_password = password.encode('utf-8')
 
 # Will query for the user with this email (emails are unique)
     user = User.query.filter_by(email=email).first()
@@ -93,6 +90,7 @@ def login_process():
     if bcrypt.checkpw((password.encode('utf-8')), user.password_hash): #this checks if the entered pass matches decrypted pass_hash
         # Will add user to session
         session["user_id"] = user.user_id
+        print('LOOOOOOOOK',session['user_id'])
 
         # Will have a flash message
         flash("Welcome! We missed you <3")
@@ -103,7 +101,6 @@ def login_process():
     else:
         flash("Oops :0 Incorrect password! Please try again :)")
         return redirect("/login")
-
 
 
 @app.route('/logout')
@@ -135,16 +132,17 @@ def process_journal_entry():
     happ_score = request.form.get('happ_score')
 
     #using that data instantiate a new journal entry
-    new_journal_entry = JournalEntry(date=date,
+    new_journal_entry = JournalEntry(user_id = session['user_id'],
+                                    date=date,
                                     entry_type=entry_type,
                                     q1_text=q1_text,
                                     q2_text=q2_text,
                                     q3_text=q3_text,
                                     happ_score=happ_score)
 
-    #add and commit to backend
-    # db.session.add(new_journal_entry)
-    # db.session.commit()
+    # add and commit to backend
+    db.session.add(new_journal_entry)
+    db.session.commit()
 
     return redirect('/history')
 
