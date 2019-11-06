@@ -160,11 +160,10 @@ def show_history():
 def show_single_entry(entry_id):
     '''Single entry'''
     # checking if the correct entry_id is coming through
-    print('LOOOOOOOOOOOOOOK', entry_id)
+    # print('LOOOOOOOOOOOOOOK', entry_id)
 
     single_journal_entry = JournalEntry.query.filter_by(entry_id=entry_id).first()
-
-    print('LOOOOOOOOOOK AGAIN', single_journal_entry)
+    # print('LOOOOOOOOOOK AGAIN', single_journal_entry)
 
     return render_template('single_entry_view.html', single_journal_entry=single_journal_entry)
 

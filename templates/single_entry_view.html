@@ -4,8 +4,15 @@
 
 <h2>Entry type: {{ single_journal_entry.entry_type.title() }}</h2>
 
+<p>What are three things you are grateful for today?</p>
+<ul>{{ single_journal_entry.q1_text }}</ul>
 
 
+<p>What are three things you can do to make today great?</p>
+<ul>{{ single_journal_entry.q2_text }}</ul>
+
+<p>Daily Affirmations: Write down three things about yourself that you want to reinforce (ex: I am a great software engineer)</p>
+<ul>{{ single_journal_entry.q3_text }}</ul>
 
 <p>{{ single_journal_entry }}</p>
 
