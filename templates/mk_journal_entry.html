@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h1>Journal Entry</h1>
+<form action='/home' method='POST'>
+    <div>
+        <label>
+            Date
+            <input type="date" name="date">
+        </label>
+    </div>
+
+    <br>
+
+    <div>
+        <label>
+            Is this a 'morning' or 'night' entry?
+            <input type="radio" name="entry_type" value='morning'>Morning
+            <input type="radio" name="entry_type" value='night'>Night
+        </label>
+    </div>
+
+    <br>
+
+  
+    <div>
+        <label>
+            What are three things you are grateful for today?
+            <input type="text" name="q1_entry">
+        </label>
+    </div>
+
+    <div>
+        <label> 
+            What are three things you can do to make today great?
+            <input type="text" name="q2_entry">
+        </label>
+    </div>
+
+    <div>
+        <label>
+             Daily Affirmations: Write down three things about yourself that you want to reinforce (ex: I am a great software engineer)
+            <input type="text" name="q3_entry">
+        </label>
+    </div>
+
+    <br>
+
+    <div>
+        <label>
+            On a scale of 1-5, 5 being 'very happy', how do you feel?
+            <input type="number" min=1 max=5 name="happ_score">
+        </label>
+    </div>
+
+    <br>
+
+    <div>
+        <input type="submit" value="Submit">
+    </div>
+
+    
+</form>
+{% endblock %}
