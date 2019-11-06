@@ -16,7 +16,7 @@ class User(db.Model):
     fname = db.Column(db.String(50), nullable=False )
     lname = db.Column(db.String(50), nullable=False)
     email = db.Column(db.String(100), unique= True, nullable=False)
-    password_hash = db.Column(db.Text, nullable=False) #not sure how long this will be yet
+    password_hash = db.Column(db.LargeBinary, nullable=False) #storing passwords as byte strings
     phone_number = db.Column(db.String(30), nullable=False)
     texting_enabled = db.Column(db.Boolean, nullable=False)
 
@@ -26,7 +26,16 @@ class User(db.Model):
         return '<User: email-{email} fname-{fname}>'.format(email=self.email, 
                                                             fname=self.fname)
 
+# class EntryType():
+#     '''Helper Table. Keeps track of 'morning' or 'night' entry'''
 
+#     __tablename__ ='entry_types'
+
+#     entry_type_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
+#     entry_type = db.Column(db.String(10), nullable=False)  #make entry types in the table morning/night
+
+#     j_entries = db.relationship('JournalEntry', backref='entry_types')
+#one j entry has one type but type can have many entrues 
 
 class JournalEntry(db.Model):
     '''All user's journal entries will live here'''
@@ -35,9 +44,11 @@ class JournalEntry(db.Model):
 
     entry_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('users.user_id'), nullable=False)
-    date = db.Column(db.Date, nullable=False) #confirm timezone=False OR change to db.Date()
     entry_type = db.Column(db.String(10), nullable=False)
-    text = db.Column(db.Text, nullable=False)
+    date = db.Column(db.Date, nullable=False) #confirm timezone=False OR change to db.Date()
+    q1_text = db.Column(db.Text, nullable=False)
+    q2_text = db.Column(db.Text, nullable=False)
+    q3_text = db.Column(db.Text, nullable=False)
     happ_score = db.Column(db.Integer, nullable=False)
 
     user = db.relationship('User', backref='journal_entries') #should i make it entries because its one to many?
