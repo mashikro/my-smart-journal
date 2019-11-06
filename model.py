@@ -1,6 +1,7 @@
 ##############CREATING TO DATABASE############################
 from flask_sqlalchemy import SQLAlchemy
 from flask import Flask
+from sqlalchemy.dialects.postgresql import ENUM
 
 # from collections import defaultdict
 
@@ -26,16 +27,9 @@ class User(db.Model):
         return '<User: email-{email} fname-{fname}>'.format(email=self.email, 
                                                             fname=self.fname)
 
-# class EntryType():
-#     '''Helper Table. Keeps track of 'morning' or 'night' entry'''
 
-#     __tablename__ ='entry_types'
+entry_type_enum = ENUM('morning', 'night', name='entry_type_enum')
 
-#     entry_type_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
-#     entry_type = db.Column(db.String(10), nullable=False)  #make entry types in the table morning/night
-
-#     j_entries = db.relationship('JournalEntry', backref='entry_types')
-#one j entry has one type but type can have many entrues 
 
 class JournalEntry(db.Model):
     '''All user's journal entries will live here'''
@@ -44,7 +38,7 @@ class JournalEntry(db.Model):
 
     entry_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('users.user_id'), nullable=False)
-    entry_type = db.Column(db.String(10), nullable=False)
+    entry_type = db.Column(entry_type_enum, nullable=False)
     date = db.Column(db.Date, nullable=False) #confirm timezone=False OR change to db.Date()
     q1_text = db.Column(db.Text, nullable=False)
     q2_text = db.Column(db.Text, nullable=False)
