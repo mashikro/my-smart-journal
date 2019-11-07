@@ -1,8 +1,10 @@
 {% extends 'base.html' %}
 {% block content %}
-<h2>Entry date: {{ single_journal_entry.date }}</h2>
+<h3>Entry date: {{ single_journal_entry.date }}</h3>
 
-<h2>Entry type: {{ single_journal_entry.entry_type.title() }}</h2>
+<h3>Entry type: {{ single_journal_entry.entry_type.title() }}</h3>
+
+<h3>Happiness score: {{ single_journal_entry.happ_score }}</h3>
 
 <p>What are three things you are grateful for today?</p>
 <ul>{{ single_journal_entry.q1_text }}</ul>

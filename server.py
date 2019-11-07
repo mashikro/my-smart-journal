@@ -49,6 +49,8 @@ def create_user_process():
     phone_number = request.form.get('phone_number')
     texting_enabled = (request.form.get('texting_enabled') == 'true') #checks 'true' == 'true'
 
+#TO DO check to see the if email is a user if yes --> flash you cant
+
 #Instatitate a new user add and commit them to db
     new_user = User(email=email, 
                     password_hash=password_hash, 
@@ -107,9 +109,9 @@ def login_process():
 def logout_process():
     '''Log user out'''
 
-    # del session["user_id"] # delete session
-    # flash("See you soon:) You are now logged out.")
-    # return redirect("/") #root
+    del session["user_id"] # delete session
+    flash("See you soon:) You are now logged out.")
+    return redirect("/") #root
 
 
 @app.route('/home', methods=['GET'])
@@ -159,11 +161,8 @@ def show_history():
 @app.route("/view-entry/<int:entry_id>")
 def show_single_entry(entry_id):
     '''Single entry'''
-    # checking if the correct entry_id is coming through
-    # print('LOOOOOOOOOOOOOOK', entry_id)
 
     single_journal_entry = JournalEntry.query.filter_by(entry_id=entry_id).first()
-    # print('LOOOOOOOOOOK AGAIN', single_journal_entry)
 
     return render_template('single_entry_view.html', single_journal_entry=single_journal_entry)
 
@@ -177,7 +176,11 @@ def show_hap_stats():
 @app.route('/profile')
 def view_profile():
     '''Show Profile page/settings'''
-    pass
+
+    user = User.query.filter_by(user_id=session['user_id']).first()
+    print('LOOOOOOOOK', user)
+
+    return render_template('profile_page.html', user=user)
 
 
 ####################### RUNNING MY SERVER ###############################
