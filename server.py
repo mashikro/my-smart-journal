@@ -33,13 +33,14 @@ def index():
 
 @app.route('/create-account', methods=['GET'])
 def create_account_form():
+    '''User's can create an account'''
 
     return render_template('create_account_form.html')
 
 
 @app.route('/create-account', methods=['POST'])
 def create_user_process():
-    '''User is able to create an account'''
+    '''Add user to the database'''
 
 # Will get all this info back:
     email = request.form.get('email')
@@ -49,8 +50,15 @@ def create_user_process():
     phone_number = request.form.get('phone_number')
     texting_enabled = (request.form.get('texting_enabled') == 'true') #checks 'true' == 'true'
 
-#TO DO check to see the if email is a user if yes --> flash you cant
+#checks if a user w that email already exists, if 'True' redirects them to try again.
+    user = User.query.filter_by(email=email).first()
 
+    if user:
+        flash('''Sorry this email is already being used. 
+            Try again with a different email address.''')
+        
+        return redirect('/create-account')
+    
 #Instatitate a new user add and commit them to db
     new_user = User(email=email, 
                     password_hash=password_hash, 
@@ -87,7 +95,6 @@ def login_process():
     if not user:
         flash("Sorry, the user with that email doesn't exist. Please try again :) ")
         return redirect("/login")
-
    
     if bcrypt.checkpw((password.encode('utf-8')), user.password_hash): #this checks if the entered pass matches decrypted pass_hash
         # Will add user to session
@@ -108,9 +115,12 @@ def login_process():
 @app.route('/logout')
 def logout_process():
     '''Log user out'''
-
-    del session["user_id"] # delete session
-    flash("See you soon:) You are now logged out.")
+    user_id = session.get("user_id")
+    
+    if user_id:
+        del session["user_id"] # delete session
+        flash("See you soon:) You are now logged out.")
+    
     return redirect("/") #root
 
 
@@ -118,12 +128,17 @@ def logout_process():
 def show_homepage():
     '''Homepage. User's can make entries to the journal here '''
 
-    return render_template('mk_journal_entry.html')
+    user_id = session.get("user_id")
+
+    if user_id:
+        return render_template('mk_journal_entry.html')
+    else:
+        return redirect('/')
 
 
 @app.route('/home', methods=['POST'])
 def process_journal_entry():
-    '''Save journal entry to backend'''
+    '''Save journal entry to database'''
     
     #get data from form
     date = request.form.get('date')
@@ -152,10 +167,13 @@ def process_journal_entry():
 def show_history():
     '''History of all entries'''
 
-    journal_entry = JournalEntry.query.filter_by(user_id=session['user_id']).all()
-    # print('LOOOOOOOOK', journal_entry) #list of journal objects
-    
-    return render_template('history_of_entries.html', journal_entries_lst=journal_entry)
+    user_id = session.get("user_id")
+
+    if user_id: 
+        journal_entry = JournalEntry.query.filter_by(user_id=session['user_id']).all()
+        return render_template('history_of_entries.html', journal_entries_lst=journal_entry)
+    else:
+        return redirect('/')
 
 
 @app.route("/view-entry/<int:entry_id>")
@@ -167,22 +185,25 @@ def show_single_entry(entry_id):
     return render_template('single_entry_view.html', single_journal_entry=single_journal_entry)
 
 
+@app.route('/profile')
+def view_profile():
+    '''Show Profile page/settings'''
+
+    user_id = session.get("user_id")
+
+    if user_id:
+        user = User.query.filter_by(user_id=user_id).first()
+        return render_template('profile_page.html', user=user)    
+    else:
+        return redirect('/')
+
+
 @app.route('/happy')
 def show_hap_stats():
     '''Happiness Stats page'''
     pass
 
-
-@app.route('/profile')
-def view_profile():
-    '''Show Profile page/settings'''
-
-    user = User.query.filter_by(user_id=session['user_id']).first()
-    print('LOOOOOOOOK', user)
-
-    return render_template('profile_page.html', user=user)
-
-
+    
 ####################### RUNNING MY SERVER ###############################
 if __name__ == "__main__":
    

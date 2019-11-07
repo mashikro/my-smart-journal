@@ -1,4 +1,4 @@
-##############CREATING TO DATABASE############################
+############## CREATING TO DATABASE ############################
 from flask_sqlalchemy import SQLAlchemy
 from flask import Flask
 from sqlalchemy.dialects.postgresql import ENUM
@@ -7,7 +7,7 @@ from sqlalchemy.dialects.postgresql import ENUM
 
 db = SQLAlchemy()
 
-####################MODEL DEFINITIONS##########################
+#################### MODEL DEFINITIONS ##########################
 
 class User(db.Model):
     '''All user and user info will live here'''
@@ -50,12 +50,15 @@ class JournalEntry(db.Model):
     def __repr__(self):
         """Provide helpful representation when printed."""
 
-        return '<JournalEntry: date-{date} entry_type-{entry_type} entry_id-{entry_id} user_email-{user_email}>'.format(date=self.date, 
-                                                                            entry_type=self.entry_type,
-                                                                            entry_id=self.entry_id,
-                                                                            user_email=self.user.email)
+        return '''<JournalEntry: date-{date} 
+                entry_type-{entry_type} 
+                entry_id-{entry_id} 
+                user_email-{user_email}>'''.format(date=self.date, 
+                                                    entry_type=self.entry_type,
+                                                    entry_id=self.entry_id,
+                                                    user_email=self.user.email)
 
-##############CONNECTING TO DATABASE##########################
+############## CONNECTING TO DATABASE ##########################
 
 def connect_to_db(app):
     """Connect the database to our Flask app."""
@@ -72,7 +75,7 @@ if __name__ == "__main__":
     # As a convenience, if we run this module interactively, it will leave
     # you in a state of being able to work with the database directly.
 
-    from server import app #FLASK IS NOT CREATED YET
+    from server import app 
 
     connect_to_db(app)
     print("Connected to DB.")
