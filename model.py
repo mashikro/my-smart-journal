@@ -28,13 +28,12 @@ class User(db.Model):
                                                             fname=self.fname)
 
 
-entry_type_enum = ENUM('morning', 'night', name='entry_type_enum')
-
-
 class JournalEntry(db.Model):
     '''All user's journal entries will live here'''
 
     __tablename__ = 'journal_entries'
+
+    entry_type_enum = ENUM('morning', 'night', name='entry_type_enum')
 
     entry_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('users.user_id'), nullable=False)

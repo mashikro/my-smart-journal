@@ -2,6 +2,14 @@
 {% block content %}
 
 <h1>Journal Entry</h1>
+
+<script
+  src="https://code.jquery.com/jquery-3.4.1.js"
+  integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+  crossorigin="anonymous"></script>
+
+<script src="/static/mkJournalEntry.js"></script>
+
 <form action='/home' method='POST'>
     <div>
         <label>
@@ -15,13 +23,15 @@
     <div>
         <label>
             Is this a 'morning' or 'night' entry?
-            <input type="radio" name="entry_type" value='morning'>Morning
-            <input type="radio" name="entry_type" value='night'>Night
+            <input type="radio" id="morningButton" name="entry_type" value='morning'>Morning
+            <input type="radio" id="nightButton" name="entry_type" value='night'>Night
         </label>
     </div>
 
     <br>
-  
+
+<!-- MORNING ROUTINE -->
+<div id='morning-qs'>
     <div>
         <label>
             What are three things you are grateful for today?
@@ -42,7 +52,34 @@
             <input type="text" name="q3_entry">
         </label>
     </div>
+</div>
+<!-- MORNING ROUTINE -->
 
+<!-- NIGHT ROUTINE  -->
+<div id='night-qs'>
+    <div>
+        <label>
+            What are three amazing things that happened today?
+            <input type="text" name="q1_entry">
+        </label>
+    </div>
+
+    <div>
+        <label> 
+            How could I have made today better?
+            <input type="text" name="q2_entry">
+        </label>
+    </div>
+
+    <div>
+        <label>
+             What is one kind thing you did for yourself or someone else today?
+            <input type="text" name="q3_entry">
+        </label>
+    </div>
+</div>
+<!-- NIGHT ROUTINE  -->
+    
     <br>
 
     <div>

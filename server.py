@@ -7,6 +7,10 @@ from flask_debugtoolbar import DebugToolbarExtension
 from model import connect_to_db, db, User, JournalEntry
 
 import bcrypt
+
+from streak import calculate_streak
+
+from happiness import get_happiness_data
  
 #################### FLASK APP SET-UP ####################################
 app = Flask(__name__)
@@ -201,9 +205,25 @@ def view_profile():
 @app.route('/happy')
 def show_hap_stats():
     '''Happiness Stats page'''
-    pass
 
+    #user session to get which user
+    user_id = session.get("user_id")
+    # call func and pass in user_id as param
+    get_happiness_data(user_id)
     
+    #create logic, you cant see unless logged in
+    return render_template('happy.html')
+
+
+######################## TESTING STREAK / HAPPINESS #####################
+@app.route('/test')
+def test():
+    '''testing helper functions'''
+    calculate_streak('merpie@gmail.com')
+    
+
+    return '<html>working on something important...</html>'
+
 ####################### RUNNING MY SERVER ###############################
 if __name__ == "__main__":
    
