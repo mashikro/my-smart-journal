@@ -14,9 +14,10 @@ def get_happiness_data(user_id):
     list_of_happ_scores = []
     #list iterate over
     for entry in list_entries:
-        print(entry.date, entry.happ_score)
+        # print(entry.date, entry.happ_score)
         list_of_dates.append(entry.date)
         list_of_happ_scores.append(entry.happ_score)
+        print('HERREEEE', entry.date)
 
     # print(list_of_dates_happ_score)
 

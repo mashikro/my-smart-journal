@@ -201,6 +201,7 @@ def view_profile():
     else:
         return redirect('/')
 
+
 @app.route('/happy')
 def show_happ_chart():
     '''Show happiness data page'''
@@ -214,63 +215,28 @@ def show_hap_stats():
 
     #user session to get which user
     user_id = session.get("user_id")
+
     # call func and pass in user_id as param
     result = get_happiness_data(user_id)
 
-    # data_dict = {
-    #             "labels": [
-    #                 "Christmas Melon",
-    #                 "Crenshaw",
-    #                 "Yellow Watermelon"
-    #             ],
-    #             "datasets": [
-    #                 {
-    #                     "data": [300, 50, 100],
-    #                     "backgroundColor": [
-    #                         "#FF6384",
-    #                         "#36A2EB",
-    #                         "#FFCE56"
-    #                     ],
-    #                     "hoverBackgroundColor": [
-    #                         "#FF6384",
-    #                         "#36A2EB",
-    #                         "#FFCE56"
-    #                     ]
-    #                 }]
-    #         }
+    #data for happiness chart
     data_dict = {
             "labels": result[0],
             "datasets": [
                 {
                     "data": result[1],
                     "backgroundColor": [
-                        "#FF6384",
-                        "#36A2EB",
-                        "#FFCE56"
+                        "#FF6384"
                     ],
                     "hoverBackgroundColor": [
-                        "#FF6384",
-                        "#36A2EB",
-                        "#FFCE56"
-                    ]
+                        "#FF6384"
+                    ],
                 }]
         }
 
-
-
     #create logic, you cant see unless logged in
-    # return render_template('happy.html')
+   
     return jsonify(data_dict)
-
-
-######################## TESTING STREAK / HAPPINESS #####################
-@app.route('/test')
-def test():
-    '''testing helper functions'''
-    calculate_streak('merpie@gmail.com')
-    
-
-    return '<html>working on something important...</html>'
 
 ####################### RUNNING MY SERVER ###############################
 if __name__ == "__main__":

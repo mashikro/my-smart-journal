@@ -1,13 +1,29 @@
 "use strict";
 
 $(document).ready(() => {
-    console.log('Is this working?')
     const options = {
-      responsive: true
+      responsive: true,
+      maintainAspectRatio: true,
+      scales: {
+        yAxes: [{
+            ticks: {
+                suggestedMin: 0,
+            }
+        }],
+        xAxes: [{
+            type: "time",
+            time: {
+                unit: 'day'
+            },
+            scaleLabel: {
+                display: true,
+                labelString: 'Date'
+            }
+        }]
+      }
     };
 
     let ctx = $('#happyChart').get(0).getContext('2d');
-    console.log('here')
 
     $.get("/happy.json", (data) => {
 
@@ -16,14 +32,10 @@ $(document).ready(() => {
                                         data: data,
                                         options: options
                                         });
-        console.log('Hello')
 
         $('#chartLegend').html(happyChart.generateLegend());
         
         });
-    
-    console.log('how about now?')
-
     });
 
     
