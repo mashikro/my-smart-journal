@@ -1,7 +1,7 @@
 ################# Necessary IMPORTS ############################
 from jinja2 import StrictUndefined
 
-from flask import Flask, render_template, request, redirect, session, flash
+from flask import Flask, render_template, request, redirect, session, flash, jsonify
 from flask_debugtoolbar import DebugToolbarExtension
 
 from model import connect_to_db, db, User, JournalEntry
@@ -201,18 +201,66 @@ def view_profile():
     else:
         return redirect('/')
 
-
 @app.route('/happy')
+def show_happ_chart():
+    '''Show happiness data page'''
+
+    return render_template('happy.html')
+
+
+@app.route('/happy.json')
 def show_hap_stats():
-    '''Happiness Stats page'''
+    '''Get data ready for happiness page'''
 
     #user session to get which user
     user_id = session.get("user_id")
     # call func and pass in user_id as param
-    get_happiness_data(user_id)
-    
+    result = get_happiness_data(user_id)
+
+    # data_dict = {
+    #             "labels": [
+    #                 "Christmas Melon",
+    #                 "Crenshaw",
+    #                 "Yellow Watermelon"
+    #             ],
+    #             "datasets": [
+    #                 {
+    #                     "data": [300, 50, 100],
+    #                     "backgroundColor": [
+    #                         "#FF6384",
+    #                         "#36A2EB",
+    #                         "#FFCE56"
+    #                     ],
+    #                     "hoverBackgroundColor": [
+    #                         "#FF6384",
+    #                         "#36A2EB",
+    #                         "#FFCE56"
+    #                     ]
+    #                 }]
+    #         }
+    data_dict = {
+            "labels": result[0],
+            "datasets": [
+                {
+                    "data": result[1],
+                    "backgroundColor": [
+                        "#FF6384",
+                        "#36A2EB",
+                        "#FFCE56"
+                    ],
+                    "hoverBackgroundColor": [
+                        "#FF6384",
+                        "#36A2EB",
+                        "#FFCE56"
+                    ]
+                }]
+        }
+
+
+
     #create logic, you cant see unless logged in
-    return render_template('happy.html')
+    # return render_template('happy.html')
+    return jsonify(data_dict)
 
 
 ######################## TESTING STREAK / HAPPINESS #####################
