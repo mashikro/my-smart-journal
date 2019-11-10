@@ -1,55 +1,51 @@
 {% extends 'base.html' %}
 {% block content %}
+ 
+ <!-- this script tag must stay here -->
+<script src="/static/mkJournalEntry.js"></script>
 
 <h1>Journal Entry</h1>
-
-<script
-  src="https://code.jquery.com/jquery-3.4.1.js"
-  integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
-  crossorigin="anonymous"></script>
-
-<script src="/static/mkJournalEntry.js"></script>
 
 <form action='/home' method='POST'>
     <div>
         <label>
             Date
-            <input type="date" name="date">
+            <input type="date" name="date" />
         </label>
     </div>
 
-    <br>
+    <br />
 
     <div>
         <label>
             Is this a 'morning' or 'night' entry?
-            <input type="radio" id="morningButton" name="entry_type" value='morning'>Morning
-            <input type="radio" id="nightButton" name="entry_type" value='night'>Night
+            <input type="radio" id="morningButton" name="entry_type" value='morning' />Morning
+            <input type="radio" id="nightButton" name="entry_type" value='night' />Night
         </label>
     </div>
 
-    <br>
+    <br />
 
 <!-- MORNING ROUTINE -->
 <div id='morning-qs'>
     <div>
         <label>
             What are three things you are grateful for today?
-            <input type="text" name="q1_entry">
+            <input type="text" name="q1_entry" autocomplete="off" />
         </label>
     </div>
 
     <div>
         <label> 
             What are three things you can do to make today great?
-            <input type="text" name="q2_entry">
+            <input type="text" name="q2_entry" autocomplete="off" />
         </label>
     </div>
 
     <div>
         <label>
              Daily Affirmations: Write down three things about yourself that you want to reinforce (ex: I am a great software engineer)
-            <input type="text" name="q3_entry">
+            <input type="text" name="q3_entry" autocomplete="off" />
         </label>
     </div>
 </div>
@@ -60,41 +56,37 @@
     <div>
         <label>
             What are three amazing things that happened today?
-            <input type="text" name="q1_entry">
+            <input type="text" name="q1_entry" autocomplete="off" />
         </label>
     </div>
 
     <div>
         <label> 
             How could I have made today better?
-            <input type="text" name="q2_entry">
+            <input type="text" name="q2_entry" autocomplete="off" />
         </label>
     </div>
 
     <div>
         <label>
              What is one kind thing you did for yourself or someone else today?
-            <input type="text" name="q3_entry">
+            <input type="text" name="q3_entry" autocomplete="off" />
         </label>
     </div>
 </div>
-<!-- NIGHT ROUTINE  -->
-    
-    <br>
-
+<!-- NIGHT ROUTINE  --> 
+<br/>
     <div>
         <label>
             On a scale of 1-5, 5 being 'very happy', how do you feel?
-            <input type="number" min=1 max=5 name="happ_score">
+            <input type="number" min=1 max=5 name="happ_score" />
         </label>
     </div>
 
-    <br>
+    <br />
 
     <div>
-        <input type="submit" value="Submit">
-    </div>
-
-    
+        <input type="submit" value="Submit" />
+    </div> 
 </form>
 {% endblock %}
