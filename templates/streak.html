@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block content %}
+<script
+  src="https://code.jquery.com/jquery-3.4.1.js"
+  integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+  crossorigin="anonymous"></script>
+
+<script src="/static/streak.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.js"></script>
+
+
+<div class="chart-container" style="width:75%;">
+    <canvas id="streakChart"></canvas>
+    
+    <div id="chartLegend"></div>
+
+</div>
+
+{% endblock %}
