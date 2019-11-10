@@ -36,19 +36,32 @@ def generate_date_range(start_date):
 def calculate_streak(all_dates):
     '''function that computes how many days in a row a user 
     filled out their journal'''
-
+    
+    # print('ACTUAL DATES', all_dates)
     start_date = sorted(all_dates)[0]
     dates_range = generate_date_range(start_date)
+    # print('DATES RANGE:',dates_range)
 
-    print(dates_range)
+    streaks = []
+    streak_count = 0
 
+    for date in dates_range:
+        if date in all_dates:
+            streak_count += 1
+            streaks.append(streak_count)
+        else:
+            streak_count = 0
+            streaks.append(streak_count)
+
+    # print('STREAKS LIST:',streaks)
+    return (dates_range, streaks)
 
 def main(user_id):
     all_dates = get_entry_dates(user_id)
-    result = calculate_streak(all_dates)
+    dates_streaks = calculate_streak(all_dates)
 
-    return result
+    return dates_streaks
 
 #7th and 9th missing
-test_dates = [datetime.date(2019, 11, 6),  datetime.date(2019, 11, 8), datetime.date(2019, 11, 10), datetime.date(2019, 11, 13), datetime.date(2019, 11, 14)]
+test_dates = [datetime.date(2019, 11, 6), datetime.date(2019, 11, 7), datetime.date(2019, 11, 8), datetime.date(2019, 11, 10), datetime.date(2019, 11, 13), datetime.date(2019, 11, 14)]
 
