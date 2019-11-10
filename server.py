@@ -172,21 +172,30 @@ def show_history():
     '''History of all entries'''
 
     user_id = session.get("user_id")
+    journal_entries = JournalEntry.query.filter_by(user_id=user_id)
 
-    sorting = request.args.get('sort') 
+    sorting = request.args.get('sort')
+    filtering = request.args.get('filter')
 
     if user_id: 
         
         if sorting:
-            journal_entry_q = JournalEntry.query.filter_by(user_id=user_id)
-            journal_entry_q = journal_entry_q.order_by(JournalEntry.date.desc())
-            journal_entry = journal_entry_q.all()
+            journal_entries = journal_entries.order_by(JournalEntry.date.desc()).all()
 
             return render_template('history_of_entries.html', 
-                                    journal_entries_lst=journal_entry)
+                                    journal_entries_lst=journal_entries)
+        if filtering:
+            if filtering == 'night':
+                journal_entries = journal_entries.filter_by(entry_type='night').all()
+            elif filtering == 'morning':
+                journal_entries = journal_entries.filter_by(entry_type='morning').all() 
+
+            return render_template('history_of_entries.html', 
+                                    journal_entries_lst=journal_entries)    
         
-        journal_entry = JournalEntry.query.filter_by(user_id=user_id).all()
-        return render_template('history_of_entries.html', journal_entries_lst=journal_entry)
+        journal_entries = journal_entries.all()
+        return render_template('history_of_entries.html', 
+                                journal_entries_lst=journal_entries)
 
     else:
         return redirect('/')
