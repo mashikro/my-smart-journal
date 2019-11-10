@@ -206,11 +206,12 @@ def view_profile():
 def show_happ_chart():
     '''Show happiness data page'''
 
+    #create logic, you cant see unless logged in
     return render_template('happy.html')
 
 
 @app.route('/happy.json')
-def show_hap_stats():
+def get_happ_stats():
     '''Get data ready for happiness page'''
 
     #user session to get which user
@@ -234,45 +235,41 @@ def show_hap_stats():
                 }]
         }
 
-    #create logic, you cant see unless logged in
-   
     return jsonify(data_dict)
+
 
 @app.route('/streak')
 def show_streak_chart():
-    '''Show streak data page'''
-    
-    user_id = session.get("user_id")
-    
-    main(user_id)
-    return '<html>lalala</html>'
+    '''Show streak data page'''    
+
+    return render_template('streak.html')
+
 
 @app.route('/streak.json')
-def show_streak_stats():
+def get_streak_stats():
     '''Get data ready for streak page'''
   
     #user session to get which user
     user_id = session.get("user_id")
 
     # call func and pass in user_id as param
-    # result = calculate_streak(user_id)
+    result = main(user_id)
 
-    # data_dict = {
-    #     "labels": result[0],
-    #     "datasets": [
-    #         {
-    #             "data": result[1],
-    #             "backgroundColor": [
-    #                 "#FF6384"
-    #             ],
-    #             "hoverBackgroundColor": [
-    #                 "#FF6384"
-    #             ],
-    #         }]
-    # }
+    data_dict = {
+        "labels": result[0],
+        "datasets": [
+            {
+                "data": result[1],
+                "backgroundColor": [
+                    "#FF6384"
+                ],
+                "hoverBackgroundColor": [
+                    "#FF6384"
+                ],
+            }]
+    }
 
-    # return jsonify(data_dict)
-    pass
+    return jsonify(data_dict)
 
 
 ####################### RUNNING MY SERVER ###############################

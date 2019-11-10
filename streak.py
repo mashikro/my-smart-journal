@@ -2,11 +2,8 @@ from model import User, JournalEntry, db
 
 import datetime 
 
-
 def get_entry_dates(user_id):
-    '''Query for user data'''
-
-    print('=========== S T A R T ===================')
+    '''Query for user data using user_id from session'''
     
     q = User.query.get(user_id)
     
@@ -19,8 +16,9 @@ def get_entry_dates(user_id):
 
     return list_of_dates
 
+
 def generate_date_range(start_date):
-    '''generates a range of date objects'''
+    '''generate a range of date objects'''
 
     current_date = datetime.date.today()
     dates_range = [datetime.date.fromordinal(i) for i in range(start_date.toordinal(), 
@@ -28,19 +26,18 @@ def generate_date_range(start_date):
     
     return dates_range
 
+
 #input: list of datetime.date objects
 #return: 2 list in a tuple (datetime.date objects and ints)
 #first date - first entry
 #last date - today
 #no gaps
 def calculate_streak(all_dates):
-    '''function that computes how many days in a row a user 
+    '''compute how many days in a row a user 
     filled out their journal'''
     
-    # print('ACTUAL DATES', all_dates)
     start_date = sorted(all_dates)[0]
     dates_range = generate_date_range(start_date)
-    # print('DATES RANGE:',dates_range)
 
     streaks = []
     streak_count = 0
@@ -53,15 +50,17 @@ def calculate_streak(all_dates):
             streak_count = 0
             streaks.append(streak_count)
 
-    # print('STREAKS LIST:',streaks)
     return (dates_range, streaks)
 
+
 def main(user_id):
+    '''Main function'''
+    
     all_dates = get_entry_dates(user_id)
     dates_streaks = calculate_streak(all_dates)
 
     return dates_streaks
 
 #7th and 9th missing
-test_dates = [datetime.date(2019, 11, 6), datetime.date(2019, 11, 7), datetime.date(2019, 11, 8), datetime.date(2019, 11, 10), datetime.date(2019, 11, 13), datetime.date(2019, 11, 14)]
+# test_dates = [datetime.date(2019, 11, 6), datetime.date(2019, 11, 7), datetime.date(2019, 11, 8), datetime.date(2019, 11, 10), datetime.date(2019, 11, 13), datetime.date(2019, 11, 14)]
 
