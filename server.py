@@ -173,9 +173,21 @@ def show_history():
 
     user_id = session.get("user_id")
 
+    sorting = request.args.get('sort') 
+
     if user_id: 
-        journal_entry = JournalEntry.query.filter_by(user_id=session['user_id']).all()
+        
+        if sorting:
+            journal_entry_q = JournalEntry.query.filter_by(user_id=user_id)
+            journal_entry_q = journal_entry_q.order_by(JournalEntry.date.desc())
+            journal_entry = journal_entry_q.all()
+
+            return render_template('history_of_entries.html', 
+                                    journal_entries_lst=journal_entry)
+        
+        journal_entry = JournalEntry.query.filter_by(user_id=user_id).all()
         return render_template('history_of_entries.html', journal_entries_lst=journal_entry)
+
     else:
         return redirect('/')
 
