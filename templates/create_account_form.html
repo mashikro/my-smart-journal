@@ -6,7 +6,7 @@
     <div>
         <label>
             Email
-            <input type="email" name="email">
+            <input type="email" name="email" required/ >
         </label>
     </div>
     
@@ -15,7 +15,7 @@
     <div>
         <label>
             Password
-            <input type="password" name="password">
+            <input type="password" name="password" required />
         </label>
     </div>
     
@@ -24,7 +24,7 @@
     <div>
         <label>
             First Name
-            <input type="text" name="fname">
+            <input type="text" name="fname" required />
         </label>
     </div>
     
@@ -33,7 +33,7 @@
     <div>
         <label>
             Last Name
-            <input type="text" name="lname">
+            <input type="text" name="lname" required />
         </label>
     </div>
     
@@ -42,7 +42,7 @@
     <div>
         <label>
             Phone Number
-            <input type="tel" name="phone_number">
+            <input type="tel" name="phone_number" placeholder="111 111 1111" pattern="[0-9]{3} [0-9]{3} [0-9]{4}" required />
         </label>
     </div>
 
@@ -51,15 +51,15 @@
     <div>
         <label>
             Enable Texting
-            <input type="radio" name="texting_enabled" value='true'>Yes
-            <input type="radio" name="texting_enabled" value='false'>No
+            <input type="radio" name="texting_enabled" value='true' />Yes
+            <input type="radio" name="texting_enabled" value='false' />No
         </label>
     </div>
     
     <br>
     
     <div>
-        <input type="submit" value="Submit">
+        <input type="submit" value="Submit" />
     </div>
 
 

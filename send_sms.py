@@ -29,7 +29,7 @@ def send_reminder(number):
                     .create(
                          body="Hi! Reminder: Dont forget to take 5 mins out of your day to write in MySmartJournal. Link:",
                          from_='+1 917 746 5429',
-                         to=number
+                         to='+1'+ number
                      )
 
     print(message.sid)
