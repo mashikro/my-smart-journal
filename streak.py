@@ -57,9 +57,12 @@ def main(user_id):
     '''Main function'''
     
     all_dates = get_entry_dates(user_id)
-    dates_streaks = calculate_streak(all_dates)
 
-    return dates_streaks
+    if len(all_dates) > 0:
+        dates_streaks = calculate_streak(all_dates)
+        return dates_streaks
+
+    return ([], [])
 
 #7th and 9th missing
 # test_dates = [datetime.date(2019, 11, 6), datetime.date(2019, 11, 7), datetime.date(2019, 11, 8), datetime.date(2019, 11, 10), datetime.date(2019, 11, 13), datetime.date(2019, 11, 14)]

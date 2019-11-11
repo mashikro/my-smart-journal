@@ -4,6 +4,8 @@ from jinja2 import StrictUndefined
 from flask import Flask, render_template, request, redirect, session, flash, jsonify
 from flask_debugtoolbar import DebugToolbarExtension
 
+import os
+
 from model import connect_to_db, db, User, JournalEntry
 
 import bcrypt
@@ -11,11 +13,12 @@ import bcrypt
 from streak import main
 
 from happiness import get_happiness_data
+
  
 #################### FLASK APP SET-UP ####################################
 app = Flask(__name__)
 
-app.secret_key = "ilovedogs" #CHANGE THIS AT SOME POINT
+app.secret_key = os.environ['FLASK_SECRET_KEY']
 
 app.jinja_env.undefined = StrictUndefined #to prevent silent but deadly jinja errors
 
