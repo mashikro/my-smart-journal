@@ -1,13 +1,16 @@
-from twilio.rest import Client
+import server
+import model
+import os
+import twilio
 import schedule
 import time
-from model import User, JournalEntry, db
-import os
+import datetime
 
 ACCOUNT_SID = os.environ['TWILIO_ACCOUNT_SID']
 AUTH_TOKEN = os.environ['TWILIO_AUTH_TOKEN']
-print(ACCOUNT_SID)
-print(AUTH_TOKEN)
+
+if ((len(ACCOUNT_SID) < 1) or (len(AUTH_TOKEN) < 1)):
+    raise Exception("failed to read twilio auth fron environ.")
 
 def get_phone_nums():
     '''Query for user data'''
