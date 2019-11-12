@@ -8,6 +8,7 @@ import datetime
 
 ACCOUNT_SID = os.environ['TWILIO_ACCOUNT_SID']
 AUTH_TOKEN = os.environ['TWILIO_AUTH_TOKEN']
+TWILIO_PNUM = os.environ['TWILIO_PHONE_NUMBER']
 
 def check_for_credentials(account_sid, auth_token):
     '''Checks to validate our credentials.''' 
@@ -36,7 +37,7 @@ def send_reminder(pnum):
     message = client.messages \
                     .create(
                          body="Hi! Reminder: Dont forget to take 5 mins out of your day to write in MySmartJournal. Link:",
-                         from_='+1 917 746 5429',
+                         from_= TWILIO_PNUM,
                          to=('+1'+ pnum)
                      )
 
