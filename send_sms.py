@@ -17,8 +17,10 @@ def get_phone_nums():
     phone_nums = []
 
     for num in q:
-        phone_nums.append(num.phone_number)
+        if len(num.phone_number) >= 10 and num.phone_number != '111 111 1111':
+            phone_nums.append(num.phone_number)
 
+    print('PHONE NUMS HEREEEEEE:', phone_nums)
     return phone_nums
 
 
@@ -29,27 +31,29 @@ def send_reminder(number):
                     .create(
                          body="Hi! Reminder: Dont forget to take 5 mins out of your day to write in MySmartJournal. Link:",
                          from_='+1 917 746 5429',
-                         to='+1'+ number
+                         to=('+1'+ number)
                      )
 
-    print(message.sid)
+    print('MESSAGE SID HEEEREEE:', message.sid)
 
 
 def send_to_all(phone_nums):
     '''Takes a list of phone nums and loops over each one and calls send_reminder'''
 
     for num in phone_nums:
+        print('USER NUMBER HEREEEE:', str(num))
         send_reminder(num) #num needs to be a string
 
-def main():
-    phone_num_list = get_phone_nums()
-    send_to_all(phone_num_list)
-    
-    schedule.every().day.at("9:30").do(job)
+def main_sms():
+    send_to_all(get_phone_nums())
 
-    while True:
-        schedule.run_pending()
-        time.sleep(1)
+
+    
+#     schedule.every().day.at("9:30").do(job)
+
+#     while True:
+#         schedule.run_pending()
+#         time.sleep(1)
 
 
 

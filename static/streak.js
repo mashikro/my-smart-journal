@@ -4,10 +4,24 @@ $(document).ready(() => {
     const options = {
       responsive: true,
       maintainAspectRatio: true,
+      legend: {
+            display: true,
+            label: {
+                fontColor: '#17cfcf',
+            }
+        },
+        title: {
+                display: true,
+                text: 'Your Journaling Habit Trend'
+        },
       scales: {
         yAxes: [{
             ticks: {
                 suggestedMin: 0,
+            },
+            scaleLabel: {
+                display: true,
+                labelString: 'Streak Score'
             }
         }],
         xAxes: [{

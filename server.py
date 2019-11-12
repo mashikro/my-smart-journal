@@ -13,6 +13,7 @@ import bcrypt
 from streak import main
 
 from happiness import get_happiness_data
+from send_sms import main_sms
 
  
 #################### FLASK APP SET-UP ####################################
@@ -249,13 +250,10 @@ def get_happ_stats():
             "labels": result[0],
             "datasets": [
                 {
+                    "label": 'Happiness Trend',
                     "data": result[1],
-                    "backgroundColor": [
-                        "#FF6384"
-                    ],
-                    "hoverBackgroundColor": [
-                        "#FF6384"
-                    ],
+                    "backgroundColor": "#FF6384",
+                    "hoverBackgroundColor": "#FF6384",
                 }]
         }
 
@@ -283,17 +281,24 @@ def get_streak_stats():
         "labels": result[0],
         "datasets": [
             {
+                "label": 'Streak Trend',
                 "data": result[1],
-                "backgroundColor": [
-                    "#FF6384"
-                ],
-                "hoverBackgroundColor": [
-                    "#FF6384"
-                ],
+                "backgroundColor": "#FF6384",
+                "hoverBackgroundColor": "#FF6384"  
             }]
     }
 
     return jsonify(data_dict)
+
+#### TESTING TWILIO ####
+@app.route('/sms')
+def send_sms():
+    '''Sends sms reminder to User's to fill out journal'''
+
+    main_sms()
+
+    return '<html> testing important stuff </html>'
+
 
 
 ####################### RUNNING MY SERVER ###############################

@@ -2,13 +2,28 @@
 
 $(document).ready(() => {
     const options = {
-      responsive: true,
-      maintainAspectRatio: true,
+        responsive: true,
+        maintainAspectRatio: true,
+        legend: {
+            display: true,
+            label: {
+                fontColor: '#17cfcf',
+            }
+        },
+        title: {
+                display: true,
+                text: 'Your Happiness Trend'
+        },
       scales: {
         yAxes: [{
             ticks: {
                 suggestedMin: 0,
+            },
+            scaleLabel: {
+                display: true,
+                labelString: 'Happiness Score'
             }
+
         }],
         xAxes: [{
             type: "time",
