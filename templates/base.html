@@ -3,11 +3,18 @@
     <head>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>My Smart Journal</title>
+    
+        <link rel="shortcut icon"
+        href="/static/favicon.ico">
 
         <!-- BOOTSTRAP CSS -->
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" 
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" 
         crossorigin="anonymous">
+    </head>
+
+    <body style="background-color:#f2ffd1;">
+
         <div>
             <a href="/home">Take me home</a> 
             || 
@@ -15,13 +22,7 @@
             || 
             <a href="/profile">Profile</a>
         </div>
-        <body style="background-color:#f2ffd1;">  
-    
 
-
-    </head>
-
-    <body>
         {% for flash in get_flashed_messages() %}
           {{ flash }}
         {% endfor %}
