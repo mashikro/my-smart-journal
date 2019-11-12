@@ -13,43 +13,46 @@ if ((len(ACCOUNT_SID) < 1) or (len(AUTH_TOKEN) < 1)):
     raise Exception("failed to read twilio auth fron environ.")
 
 def get_phone_nums():
-    '''Query for user data'''
+    '''Query for user phone numbers'''
     
-    q = User.query.filter_by(texting_enabled = 'true') 
+    q = model.User.query.filter_by(texting_enabled = 'true') 
     
     phone_nums = []
 
     for num in q:
         if len(num.phone_number) >= 10 and num.phone_number != '111 111 1111':
             phone_nums.append(num.phone_number)
-
-    print('PHONE NUMS HEREEEEEE:', phone_nums)
     return phone_nums
 
 
-def send_reminder(number):
-    client = Client(ACCOUNT_SID, AUTH_TOKEN )
+def send_reminder(pnum):
+    '''Use Twilio to send text message to pnum'''
+    client = twilio.rest.Client(ACCOUNT_SID, AUTH_TOKEN )
 
     message = client.messages \
                     .create(
                          body="Hi! Reminder: Dont forget to take 5 mins out of your day to write in MySmartJournal. Link:",
                          from_='+1 917 746 5429',
-                         to=('+1'+ number)
+                         to=('+1'+ pnum)
                      )
 
-    print('MESSAGE SID HEEEREEE:', message.sid)
+    print('Sent reminder to', pnum, "SID:", message.sid)
 
 
 def send_to_all(phone_nums):
     '''Takes a list of phone nums and loops over each one and calls send_reminder'''
 
     for num in phone_nums:
-        print('USER NUMBER HEREEEE:', str(num))
         send_reminder(num) #num needs to be a string
 
-def main_sms():
+def send_all_reminders():
+    '''Combines grabbing phone numbers from db with sending reminders 
+    to each phone number'''
+    
     send_to_all(get_phone_nums())
+    print('Sent all reminders ro users!')
 
+schedule.every().day.at("17:00").do(send_all_reminders) # UTC time 5pm is 9am PST
 
     
 #     schedule.every().day.at("9:30").do(job)
