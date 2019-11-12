@@ -9,8 +9,12 @@ import datetime
 ACCOUNT_SID = os.environ['TWILIO_ACCOUNT_SID']
 AUTH_TOKEN = os.environ['TWILIO_AUTH_TOKEN']
 
-if ((len(ACCOUNT_SID) < 1) or (len(AUTH_TOKEN) < 1)):
-    raise Exception("failed to read twilio auth fron environ.")
+def check_for_credentials(account_sid, auth_token):
+    '''Checks to validate our credentials.''' 
+    if ((len(account_sid) < 1) or (len(auth_token) < 1)):
+        raise Exception("failed to read twilio auth fron environ.")
+    else: 
+        print('Account Sid and Auth token are good to go :)')
 
 def get_phone_nums():
     '''Query for user phone numbers'''
@@ -20,7 +24,7 @@ def get_phone_nums():
     phone_nums = []
 
     for num in q:
-        if len(num.phone_number) >= 10 and num.phone_number != '111 111 1111':
+        if len(num.phone_number) >= 10 and (num.phone_number != '111 111 1111'): # need to drop test users from db and recreate
             phone_nums.append(num.phone_number)
     return phone_nums
 
@@ -68,6 +72,7 @@ def main():
     app.debug=True
     model.connect_to_db(app)
     print("connected to db.")
+    check_for_credentials(ACCOUNT_SID, AUTH_TOKEN)
     run_scheduler()
 
 
@@ -77,6 +82,6 @@ if __name__ == '__main__':
 
 
 
-    
+
 #To verify people's num on my trial account: twilio.com/user/account/phone-numbers/verified
 

@@ -13,8 +13,6 @@ import bcrypt
 from streak import main
 
 from happiness import get_happiness_data
-from send_sms import main_sms
-
  
 #################### FLASK APP SET-UP ####################################
 app = Flask(__name__)
@@ -251,8 +249,9 @@ def get_happ_stats():
             "datasets": [
                 {
                     "label": 'Happiness Trend',
+                    "borderColor": "#e02bed",
                     "data": result[1],
-                    "backgroundColor": "#FF6384",
+                    "backgroundColor": "#e9b7ed",
                     "hoverBackgroundColor": "#FF6384",
                 }]
         }
@@ -289,17 +288,6 @@ def get_streak_stats():
     }
 
     return jsonify(data_dict)
-
-#### TESTING TWILIO ####
-@app.route('/sms')
-def send_sms():
-    '''Sends sms reminder to User's to fill out journal'''
-
-    main_sms()
-
-    return '<html> testing important stuff </html>'
-
-
 
 ####################### RUNNING MY SERVER ###############################
 if __name__ == "__main__":
