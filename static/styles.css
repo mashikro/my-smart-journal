@@ -1,0 +1,5 @@
+/*Navbat background colors*/
+.navbar-custom-theme {
+  background: linear-gradient(to left, #9f9fed, #d4c1ec);
+  height: 50px;
+}
