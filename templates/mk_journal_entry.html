@@ -1,8 +1,6 @@
 {% extends 'base.html' %}
-{% block content %}
- 
- <!-- this script tag must stay here -->
-<script src="/static/mkJournalEntry.js"></script>
+
+{% block content %} 
 
 <h1>Journal Entry</h1>
 
@@ -90,4 +88,10 @@
         <input type="submit" value="Submit" />
     </div> 
 </form>
+
+{% endblock %}
+
+
+{% block script %}
+<script src="/static/mkJournalEntry.js"></script>
 {% endblock %}

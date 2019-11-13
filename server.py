@@ -281,6 +281,7 @@ def get_streak_stats():
         "datasets": [
             {
                 "label": 'Streak Trend',
+                "borderColor": "#e02bed",
                 "data": result[1],
                 "backgroundColor": "#FF6384",
                 "hoverBackgroundColor": "#FF6384"  

@@ -1,8 +1,6 @@
 {% extends 'base.html' %}
-{% block content %}
 
-<!-- this must stay here -->
-<script src="/static/happy.js"></script>
+{% block content %}
 
 <div class="chart-container" style="width:75%;">
     <canvas id="happyChart"></canvas>
@@ -10,4 +8,9 @@
     <!-- <div id="chartLegend"></div> -->
 </div>
 
+{% endblock %}
+
+
+{% block script %}
+<script src="/static/happy.js"></script>
 {% endblock %}

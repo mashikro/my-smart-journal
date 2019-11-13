@@ -1,8 +1,6 @@
 {% extends 'base.html' %}
-{% block content %}
 
-<!-- this script tag must stay here -->
-<script src="/static/streak.js"></script>
+{% block content %}
 
 <div class="chart-container" style="width:75%;">
     <canvas id="streakChart"></canvas>
@@ -11,4 +9,8 @@
 
 </div>
 
+{% endblock %}
+
+{% block script %}
+<script src="/static/streak.js"></script>
 {% endblock %}
