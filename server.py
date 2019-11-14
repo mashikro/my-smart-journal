@@ -100,32 +100,32 @@ def login_process():
 #User authentication
     if not user:
         flash("Sorry, the user with that email doesn't exist. Please try again :) ")
-        return redirect("/login")
+        return redirect('/login')
    
     if bcrypt.checkpw((password.encode('utf-8')), user.password_hash): #this checks if the entered pass matches decrypted pass_hash
         # Will add user to session
-        session["user_id"] = user.user_id
+        session['user_id'] = user.user_id
         # print('LOOOOOOOOK',session['user_id'])
 
         # Will have a flash message
-        flash("Welcome! We missed you <3")
+        flash('Welcome! We missed you <3')
 
         return redirect('/home')
     
     # if pass doesnt match:
     else:
-        flash("Oops :0 Incorrect password! Please try again :)")
-        return redirect("/login")
+        flash('Oops :0 Incorrect password! Please try again :)')
+        return redirect('/login')
 
 
 @app.route('/logout')
 def logout_process():
     '''Log user out'''
-    user_id = session.get("user_id")
+    user_id = session.get('user_id')
     
     if user_id:
-        del session["user_id"] # delete session
-        flash("See you soon:) You are now logged out.")
+        del session['user_id'] # delete session
+        flash('See you soon:) You are now logged out.')
     
     return redirect("/") #root
 
@@ -134,7 +134,7 @@ def logout_process():
 def show_homepage():
     '''Homepage. User's can make entries to the journal here '''
 
-    user_id = session.get("user_id")
+    user_id = session.get('user_id')
 
     if user_id:
         return render_template('mk_journal_entry.html')
@@ -173,7 +173,7 @@ def process_journal_entry():
 def show_history():
     '''History of all entries'''
 
-    user_id = session.get("user_id")
+    user_id = session.get('user_id')
     journal_entries = JournalEntry.query.filter_by(user_id=user_id)
 
     sorting = request.args.get('sort')
@@ -182,20 +182,13 @@ def show_history():
     if user_id: 
         
         if sorting:
-            journal_entries = journal_entries.order_by(JournalEntry.date.desc()).all()
+            journal_entries = journal_entries.order_by(JournalEntry.date.desc())
 
-            return render_template('history_of_entries.html', 
-                                    journal_entries_lst=journal_entries)
         if filtering:
-            if filtering == 'night':
-                journal_entries = journal_entries.filter_by(entry_type='night').all()
-            elif filtering == 'morning':
-                journal_entries = journal_entries.filter_by(entry_type='morning').all() 
-
-            return render_template('history_of_entries.html', 
-                                    journal_entries_lst=journal_entries)    
+            journal_entries = journal_entries.filter_by(entry_type=filtering)  
         
         journal_entries = journal_entries.all()
+
         return render_template('history_of_entries.html', 
                                 journal_entries_lst=journal_entries)
 
@@ -203,7 +196,7 @@ def show_history():
         return redirect('/')
 
 
-@app.route("/view-entry/<int:entry_id>")
+@app.route('/view-entry/<int:entry_id>')
 def show_single_entry(entry_id):
     '''Single entry'''
 
@@ -216,7 +209,7 @@ def show_single_entry(entry_id):
 def view_profile():
     '''Show Profile page/settings'''
 
-    user_id = session.get("user_id")
+    user_id = session.get('user_id')
 
     if user_id:
         user = User.query.filter_by(user_id=user_id).first()
@@ -229,8 +222,12 @@ def view_profile():
 def show_happ_chart():
     '''Show happiness data page'''
 
-    #create logic, you cant see unless logged in
-    return render_template('happy.html')
+    user_id = session.get('user_id')
+    
+    if user_id:
+        return render_template('happy.html')
+    else:
+        return redirect('/')
 
 
 @app.route('/happy.json')
@@ -238,7 +235,7 @@ def get_happ_stats():
     '''Get data ready for happiness page'''
 
     #user session to get which user
-    user_id = session.get("user_id")
+    user_id = session.get('user_id')
 
     # call func and pass in user_id as param
     result = get_happiness_data(user_id)
@@ -249,9 +246,9 @@ def get_happ_stats():
             "datasets": [
                 {
                     "label": 'Happiness Trend',
-                    "borderColor": "#e02bed",
+                    "borderColor": "#fef9ff",
                     "data": result[1],
-                    "backgroundColor": "#e9b7ed",
+                    "backgroundColor": "#d4c1ec",
                     "hoverBackgroundColor": "#FF6384",
                 }]
         }
@@ -263,7 +260,13 @@ def get_happ_stats():
 def show_streak_chart():
     '''Show streak data page'''    
 
-    return render_template('streak.html')
+    user_id = session.get('user_id')
+    
+    if user_id:
+        return render_template('streak.html')    
+    else:
+        return redirect('/')
+    
 
 
 @app.route('/streak.json')
@@ -271,7 +274,7 @@ def get_streak_stats():
     '''Get data ready for streak page'''
   
     #user session to get which user
-    user_id = session.get("user_id")
+    user_id = session.get('user_id')
 
     # call func and pass in user_id as param
     result = main(user_id)
@@ -281,9 +284,9 @@ def get_streak_stats():
         "datasets": [
             {
                 "label": 'Streak Trend',
-                "borderColor": "#e02bed",
+                "borderColor": "#fef9ff",
                 "data": result[1],
-                "backgroundColor": "#FF6384",
+                "backgroundColor": "#d4c1ec",
                 "hoverBackgroundColor": "#FF6384"  
             }]
     }
