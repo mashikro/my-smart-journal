@@ -25,8 +25,7 @@ def get_phone_nums():
     phone_nums = []
 
     for num in q:
-        if len(num.phone_number) >= 10 and (num.phone_number != '111 111 1111'): # need to drop test users from db and recreate
-            phone_nums.append(num.phone_number)
+        phone_nums.append(num.phone_number)
     return phone_nums
 
 
