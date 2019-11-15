@@ -293,6 +293,43 @@ def get_streak_stats():
 
     return jsonify(data_dict)
 
+@app.route('/sentiment-analysis')
+def show_sentiment_analysis_data():
+    '''Show user data where sentiment analysis was performed'''    
+
+    user_id = session.get('user_id')
+    
+    if user_id:
+        return render_template('sentiment_analysis.html')    #create this page
+    else:
+        return redirect('/')
+
+
+@app.route('/sentiment-analysis.json')
+def get_sentiment_analysis_data():
+    '''Get data ready for sentiment analysis page'''
+  
+    #user session to get which user
+    user_id = session.get('user_id')
+
+    # call func and pass in user_id as param
+
+    # structure data in a dictionary 
+    # data_dict = {
+    #     "labels": result[0],
+    #     "datasets": [
+    #         {
+    #             "label": 'Streak Trend',
+    #             "borderColor": "#fef9ff",
+    #             "data": result[1],
+    #             "backgroundColor": "#d4c1ec",
+    #             "hoverBackgroundColor": "#FF6384"  
+    #         }]
+    # }
+
+    # return jsonify(data_dict)
+    pass
+
 ####################### RUNNING MY SERVER ###############################
 if __name__ == "__main__":
    
