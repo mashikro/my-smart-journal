@@ -300,7 +300,7 @@ def show_sentiment_analysis_data():
     user_id = session.get('user_id')
     
     if user_id:
-        return render_template('sentiment_analysis.html')    #create this page
+        return render_template('sentiment_analysis.html')
     else:
         return redirect('/')
 

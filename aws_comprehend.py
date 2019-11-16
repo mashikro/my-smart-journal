@@ -19,8 +19,6 @@ def get_query(user_id):
                                     entry.q2_text,
                                     entry.q3_text])
 
-    # print('LIST OF INPUTS:', list_of_inputs)
-
     return list_of_inputs   
     
 def aws_make_request(user_string):
@@ -31,8 +29,6 @@ def aws_make_request(user_string):
         Text=user_string, #just text and not textlist
         LanguageCode='en'
     )
-
-    # print(response)
 
     return response
 
@@ -80,20 +76,17 @@ def organize_reponse_objects(responses):
     for response in responses:
         sentiment.append(response['Sentiment'])
         sentiment_score.append((response['SentimentScore'].keys(), 
-                                response['SentimentScore'].values()))
-        
+                                response['SentimentScore'].values()))  
     
     return (sentiment, sentiment_score) #tuple with 2 lists 
 
 
 def main(user_id):
     '''Main function uses helper functions to make API request'''
+   
     user_all_entries = get_query(user_id)
     responses = apply_sentiment_on_each_data(user_all_entries)
     organized_reponses = organize_reponse_objects(responses)
-
-    #todo parse through response objects and return 
-    #workable response objects for front end
 
     return organized_reponses
 
