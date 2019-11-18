@@ -71,30 +71,18 @@ def organize_reponse_objects(responses):
     # 'Mixed': 4.310160147724673e-05
     } '''
 
-    sentiment = [] #1 item list
-    sentiment_score = [] #2 list nested in 1 list 
+    # sentiment = [] #1 item list
+    sentiment_score = [] #list of dictionaries 
 
     for response in responses:
-        sentiment.append(response['Sentiment'])
-        sentiment_score.append((response['SentimentScore'].keys(), 
-                                response['SentimentScore'].values()))  
+        # sentiment.append(response['Sentiment'])
+        sentiment_score.append((response['SentimentScore']))
     
-    return (sentiment, sentiment_score) #tuple with 2 lists 
+    return sentiment_score 
 
 
 def main(user_id):
-    '''Main function uses helper functions to make API request
-    ((['POSITIVE', 'POSITIVE', 'NEUTRAL', 'NEUTRAL'], 
-    [(dict_keys(['Positive', 'Negative', 'Neutral', 'Mixed']), 
-    dict_values([0.5676356554031372, 0.0007096294430084527, 0.431611567735672, 4.310160147724673e-05])), 
-    (dict_keys(['Positive', 'Negative', 'Neutral', 'Mixed']), 
-    dict_values([0.7936040759086609, 0.004303410183638334, 0.20203734934329987, 5.515471275430173e-05])), 
-    (dict_keys(['Positive', 'Negative', 'Neutral', 'Mixed']), 
-    dict_values([0.3683869540691376, 0.006351249758154154, 0.625140905380249, 0.00012093513942090794])), 
-    (dict_keys(['Positive', 'Negative', 'Neutral', 'Mixed']), 
-    dict_values([0.00895390473306179, 0.027104999870061874, 0.9639381170272827, 3.0295936994662043e-06]))]), 
-    [datetime.date(2019, 11, 11), datetime.date(2019, 11, 13), datetime.date(2019, 11, 15), datetime.date(2019, 11, 15)])
-    '''
+    '''Main function uses helper functions to make API request'''
     
     # returns two item tuple (entries list and dates list)
     journal_entries_dates = get_query(user_id)
@@ -103,8 +91,8 @@ def main(user_id):
     #returns two item tuple
     organized_reponses = organize_reponse_objects(responses)
 
-    #returning 'organized_response' which is a tuple w 2 items and list of dates
-    return (organized_reponses, journal_entries_dates[1]) 
+    #returning 'organized_response' which is a list of dicts and list of dates
+    return (journal_entries_dates[1], organized_reponses) 
 
 
 if __name__ == '__main__': 
