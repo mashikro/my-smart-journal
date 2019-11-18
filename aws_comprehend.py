@@ -11,15 +11,15 @@ def get_query(user_id):
     list_entries = q.journal_entries
     # print('LIST OF ENTRIES:', list_entries)
     
-    list_of_inputs = []
+    user_entries_q1 = []
+    dates_for_entries = []
 
     for entry in list_entries:
         if len(entry.q1_text) > 5:
-            list_of_inputs.append([entry.q1_text, 
-                                    entry.q2_text,
-                                    entry.q3_text])
+            user_entries_q1.append(entry.q1_text)
+            dates_for_entries.append(entry.date)
 
-    return list_of_inputs   
+    return (user_entries_q1, dates_for_entries)  #first item goes into sentiment analysis
     
 def aws_make_request(user_string):
     '''Takes in user data and makes api call to AWS comprehend for 
