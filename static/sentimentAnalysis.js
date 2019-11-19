@@ -18,6 +18,7 @@ $(document).ready(() => {
         yAxes: [{
             ticks: {
                 suggestedMin: 0,
+                stepSize: 0.05
             },
             scaleLabel: {
                 display: true,
@@ -40,7 +41,7 @@ $(document).ready(() => {
     let ctx = $('#sentimentChart').get(0).getContext('2d');
 
     $.get("/sentiment-analysis.json", (data) => {
-        console.log(data)
+        console.log('Here is the data:', data)
         let sentimentChart = new Chart(ctx, {
                                         type: 'bar',
                                         data: data,
@@ -48,6 +49,6 @@ $(document).ready(() => {
                                         });
 
         // $('#chartLegend').html(happyChart.generateLegend());
-        
+        console.log('SUCCESS!!!!!')
         });
     });

@@ -13,6 +13,8 @@ import bcrypt
 from streak import main
 
 from happiness import get_happiness_data
+
+from aws_comprehend import do_sentiment_analysis
  
 #################### FLASK APP SET-UP ####################################
 app = Flask(__name__)
@@ -313,22 +315,79 @@ def get_sentiment_analysis_data():
     user_id = session.get('user_id')
 
     # call func and pass in user_id as param
+    result = do_sentiment_analysis(user_id)
+    
+    positives = []
+    negatives = []
+    neutrals = []
+    print('LOOOOK here MASHA', result[1])
 
-    # structure data in a dictionary 
-    # data_dict = {
-    #     "labels": result[0],
+    for inner_dict in result[1]:
+
+        # positives.append(inner_dict['Positive'])
+        # negatives.append(inner_dict['Negative'])
+        # neutrals.append(inner_dict['Neutral'])
+
+        if inner_dict['Positive'] < .05:
+            positives.append(round(inner_dict['Positive']))
+        else:
+            positives.append(inner_dict['Positive'])
+        
+        if inner_dict['Negative'] < .05:
+           negatives.append(round(inner_dict['Negative']))
+        else:
+            negatives.append(inner_dict['Negative'])
+            
+        if inner_dict['Neutral'] < .05:
+           neutrals.append(round(inner_dict['Neutral']))
+        else:
+            neutrals.append(inner_dict['Neutral'])
+    
+    print('===============')
+    print(positives)
+    print(negatives)
+    print(neutrals)
+    print('===============')
+
+
+    data_dict = {
+        "labels": result[0],
+        "datasets": [
+            {
+            "label": "Postive",
+            "backgroundColor": "#d4c1ec",
+            "data": positives
+            },
+            {
+            "label": "Negative",
+            "backgroundColor": "#9f9fed",
+            "data": negatives
+            }, 
+            {
+            "label": "Neutral",
+            "backgroundColor": "#736ced",
+            "data": neutrals
+            }
+        ]
+    }
+
+    # data_dict_alt = {
+    #     "labels": [1, 2, 3],
     #     "datasets": [
-    #         {
-    #             "label": 'Streak Trend',
-    #             "borderColor": "#fef9ff",
-    #             "data": result[1],
-    #             "backgroundColor": "#d4c1ec",
-    #             "hoverBackgroundColor": "#FF6384"  
-    #         }]
+    #     {
+    #     "label": "Positive",
+    #     "backgroundColor": "#d4c1ec",
+    #     "data": [1, 0.5, 0.8]
+    #     }, 
+    #     {"label": "Negative",
+    #     "backgroundColor": "#9f9fed",
+    #     "data": [0.3, 0.8, 0.7]
+    #     }, 
+    #     ]
     # }
 
-    # return jsonify(data_dict)
-    pass
+    return jsonify(data_dict)
+    
 
 ####################### RUNNING MY SERVER ###############################
 if __name__ == "__main__":

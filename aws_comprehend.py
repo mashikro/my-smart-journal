@@ -1,6 +1,6 @@
 import boto3
 import model
-import server
+# import server
 import json
 
 client = boto3.client('comprehend')
@@ -77,21 +77,28 @@ def organize_reponse_objects(responses):
     for response in responses:
         # sentiment.append(response['Sentiment'])
         sentiment_score.append((response['SentimentScore']))
-    
-    return sentiment_score 
+
+    print('THIS IS THE SENTIMENT SCORE', sentiment_score)
+    # final_list = []
+    # for inner_dict in sentiment_score:
+    #     dict_values = inner_dict.values()
+    #     list_values = list(dict_values)[:3]
+    #     final_list.append(list_values)
+
+    return sentiment_score
 
 
-def main(user_id):
+def do_sentiment_analysis(user_id):
     '''Main function uses helper functions to make API request'''
     
     # returns two item tuple (entries list and dates list)
     journal_entries_dates = get_query(user_id)
     #first item in 'journal_entries_dates' which is a list of all queries
     responses = apply_sentiment_on_each_data(journal_entries_dates[0]) 
-    #returns two item tuple
+    #returns list w 3 items [postive, negative, neutral]
     organized_reponses = organize_reponse_objects(responses)
 
-    #returning 'organized_response' which is a list of dicts and list of dates
+    #returning 'organized_response' which is a list of dates and a list of sentiment scores
     return (journal_entries_dates[1], organized_reponses) 
 
 
