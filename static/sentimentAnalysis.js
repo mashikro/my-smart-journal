@@ -1,7 +1,15 @@
 "use strict";
+// Need to change date coming in as string to Date JS object 
+// when working with clustered bar graphs
+
+let formatDateStringForChart = (s) => {
+    let d = new Date(s);
+    return d.toDateString();
+};
 
 $(document).ready(() => {
-    const options = {
+    console.log("document.ready");
+    let options = {
       responsive: true,
       maintainAspectRatio: true,
       legend: {
@@ -26,10 +34,6 @@ $(document).ready(() => {
             }
         }],
         xAxes: [{
-            type: "time",
-            time: {
-                unit: 'day'
-            },
             scaleLabel: {
                 display: true,
                 labelString: 'Date'
@@ -40,15 +44,26 @@ $(document).ready(() => {
 
     let ctx = $('#sentimentChart').get(0).getContext('2d');
 
-    $.get("/sentiment-analysis.json", (data) => {
-        console.log('Here is the data:', data)
-        let sentimentChart = new Chart(ctx, {
-                                        type: 'bar',
-                                        data: data,
-                                        options: options
-                                        });
+    $.getJSON("/sentiment-analysis.json", (data) => {
 
+        
+        // for (let i = 0; i < data.labels.length; i++) {
+        //     data.labels[i] = formatDateStringForChart(data.labels[i]);
+        // }
+
+        // format dates using helper func from above
+        for (let date of data.labels) {
+            date = formatDateStringForChart(date);
+        }
+        
+        let sentimentChart = new Chart(ctx, {
+                                            type: 'bar',
+                                            data: data,
+                                            options: options
+                                            });
+        
+        
         // $('#chartLegend').html(happyChart.generateLegend());
-        console.log('SUCCESS!!!!!')
-        });
+    
     });
+});
