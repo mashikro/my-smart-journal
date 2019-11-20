@@ -171,6 +171,7 @@ def process_journal_entry():
 
     return redirect('/history')
 
+
 @app.route('/history')
 def show_history():
     '''History of all entries'''
@@ -270,7 +271,6 @@ def show_streak_chart():
         return redirect('/')
     
 
-
 @app.route('/streak.json')
 def get_streak_stats():
     '''Get data ready for streak page'''
@@ -294,6 +294,7 @@ def get_streak_stats():
     }
 
     return jsonify(data_dict)
+
 
 @app.route('/sentiment-analysis')
 def show_sentiment_analysis_data():
@@ -320,35 +321,12 @@ def get_sentiment_analysis_data():
     positives = []
     negatives = []
     neutrals = []
-    print('LOOOOK here MASHA', result[1])
 
-    for inner_dict in result[1]:
-
-        # positives.append(inner_dict['Positive'])
-        # negatives.append(inner_dict['Negative'])
-        # neutrals.append(inner_dict['Neutral'])
-
-        if inner_dict['Positive'] < .05:
-            positives.append(round(inner_dict['Positive']))
-        else:
-            positives.append(inner_dict['Positive'])
-        
-        if inner_dict['Negative'] < .05:
-           negatives.append(round(inner_dict['Negative']))
-        else:
-            negatives.append(inner_dict['Negative'])
-            
-        if inner_dict['Neutral'] < .05:
-           neutrals.append(round(inner_dict['Neutral']))
-        else:
-            neutrals.append(inner_dict['Neutral'])
-    
-    print('===============')
-    print(positives)
-    print(negatives)
-    print(neutrals)
-    print('===============')
-
+    #format data for json
+    for inner_dict in result[1]:     
+        positives.append(round(inner_dict['Positive'], 4))
+        negatives.append(round(inner_dict['Negative'], 4))
+        neutrals.append(round(inner_dict['Neutral'], 4))
 
     data_dict = {
         "labels": result[0],
@@ -370,21 +348,6 @@ def get_sentiment_analysis_data():
             }
         ]
     }
-
-    # data_dict_alt = {
-    #     "labels": [1, 2, 3],
-    #     "datasets": [
-    #     {
-    #     "label": "Positive",
-    #     "backgroundColor": "#d4c1ec",
-    #     "data": [1, 0.5, 0.8]
-    #     }, 
-    #     {"label": "Negative",
-    #     "backgroundColor": "#9f9fed",
-    #     "data": [0.3, 0.8, 0.7]
-    #     }, 
-    #     ]
-    # }
 
     return jsonify(data_dict)
     
