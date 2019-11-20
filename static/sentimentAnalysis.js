@@ -46,14 +46,12 @@ $(document).ready(() => {
 
     $.getJSON("/sentiment-analysis.json", (data) => {
 
-        
-        // for (let i = 0; i < data.labels.length; i++) {
-        //     data.labels[i] = formatDateStringForChart(data.labels[i]);
-        // }
-
         // format dates using helper func from above
-        for (let date of data.labels) {
-            date = formatDateStringForChart(date);
+        for (let i in data.labels) {
+            console.log(data.labels[i]);
+            data.labels[i] = formatDateStringForChart(data.labels[i]);
+
+            console.log(data.labels[i]);
         }
         
         let sentimentChart = new Chart(ctx, {
