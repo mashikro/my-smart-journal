@@ -1,5 +1,6 @@
 "use strict";
 
+
 $(document).ready(() => {
     const options = {
       responsive: true,

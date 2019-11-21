@@ -51,7 +51,7 @@ $(document).ready(() => {
             console.log(data.labels[i]);
             data.labels[i] = formatDateStringForChart(data.labels[i]);
 
-            console.log(data.labels[i]);
+            // console.log(data.labels[i]);
         }
         
         let sentimentChart = new Chart(ctx, {
