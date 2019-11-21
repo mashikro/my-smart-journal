@@ -1,11 +1,28 @@
 {% extends 'base.html' %}
 
 {% block content %}
-
-<div class="chart-container" style="width:75%;">
-    <canvas id="happyChart"></canvas>
-    
-    <!-- <div id="chartLegend"></div> -->
+<div class="container">
+    <div class="row">
+        <div class="chart-container" style="width:75%;">
+            <canvas id="happyChart"></canvas>
+            
+            <!-- <div id="chartLegend"></div> -->
+        </div>
+    </div>
+    <div class="row">  
+        <p>
+          <a class="btn btn-primary" data-toggle="collapse" href="#multiCollapseExample1" role="button" aria-expanded="false" aria-controls="multiCollapseExample1" id='streak-how-button'>Tell me more about happiness!</a>
+        </p>
+        <div class="row">
+          <div class="col">
+            <div class="collapse multi-collapse" id="multiCollapseExample1">
+              <div class="card card-body" style="width:50%;" id='streak-how-body'>
+                Your happiness graph is visualized by using the happiness score you enter when you make a journal entry. This is the history of your happiness. You may see 1 - 2 happiness score for each day. 
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>
 </div>
 
 {% endblock %}

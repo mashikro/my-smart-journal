@@ -1,11 +1,28 @@
 {% extends 'base.html' %}
 
 {% block content %}
+<div class="container">
+    <div class="row">
+        <div class="chart-container" style="width:75%;">
+            <canvas id="streakChart"></canvas>
+            <!-- <div id="chartLegend"></div> -->
+        </div>
+    </div>
 
-<div class="chart-container" style="width:75%;">
-    <canvas id="streakChart"></canvas>
-    
-    <!-- <div id="chartLegend"></div> -->
+    <div class="row">  
+        <p>
+          <a class="btn btn-primary" data-toggle="collapse" href="#multiCollapseExample1" role="button" aria-expanded="false" aria-controls="multiCollapseExample1" id='streak-how-button'>How are streaks calculated?</a>
+        </p>
+        <div class="row">
+          <div class="col">
+            <div class="collapse multi-collapse" id="multiCollapseExample1">
+              <div class="card card-body" style="width:50%;" id='streak-how-body'>
+                Streaks are calculated by checking if you have made at least 1 journal entry. If you consecutively make 1 journal entry a day your streak will increase by +1 for each day. If you miss a day, your streak will go down to 0. 
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>
 
 </div>
 
