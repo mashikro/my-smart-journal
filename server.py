@@ -350,6 +350,54 @@ def get_sentiment_analysis_data():
     }
 
     return jsonify(data_dict)
+
+
+@app.route('/action')
+def show_action_data():
+    '''Show user data where sentiment analysis was performed'''    
+
+    user_id = session.get('user_id')
+    
+    if user_id:
+        return render_template('action.html') #make this page
+    else:
+        return redirect('/')
+
+
+@app.route('/action.json')
+def get_action_data():
+    '''Get data ready for sentiment analysis page'''
+  
+    #user session to get which user
+    user_id = session.get('user_id')
+
+    # call func and pass in user_id as param
+    
+    #format data appropriately
+    # data_dict = {
+    #     "labels": result[0],
+    #     "datasets": [
+    #         {
+    #         "label": "Postive",
+    #         "backgroundColor": "#d4c1ec",
+    #         "data": positives
+    #         },
+    #         {
+    #         "label": "Negative",
+    #         "backgroundColor": "#9f9fed",
+    #         "data": negatives
+    #         }, 
+    #         {
+    #         "label": "Neutral",
+    #         "backgroundColor": "#736ced",
+    #         "data": neutrals
+    #         }
+    #     ]
+    # }
+
+    # return jsonify(data_dict)
+
+    pass
     
 
 ####################### RUNNING MY SERVER ###############################
