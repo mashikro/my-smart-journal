@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+            <div class="chart-container" style="width:75%;">
+                <canvas id="actionChart"></canvas>
+             <!--    <div id="chartLegend"></div> -->
+            </div> 
+    </div>
+</div>
+   <!--  <div class="row">  
+        <p>
+          <a class="btn btn-primary" data-toggle="collapse" href="#multiCollapseExample1" role="button" aria-expanded="false" aria-controls="multiCollapseExample1" id='streak-how-button'>How is Action Analysis performed?</a>
+        </p>
+        <div class="row">
+          <div class="col">
+            <div class="collapse multi-collapse" id="multiCollapseExample1">
+              <div class="card card-body" style="width:50%;" id='streak-how-body'>
+               <ul>
+                  <li>Write something here</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>
+</div> 
+ -->
+       
+
+{% endblock %}
+
+{% block script %}
+<script src="/static/actionAnalysis.js"></script>
+{% endblock %}
