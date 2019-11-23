@@ -20,3 +20,18 @@
     /*background: #9f9fed;*/
     background: #d4c1ec;
 }
+
+.btn-sm {
+    /*background: #9f9fed;*/
+    background: #d4c1ec;
+}
+
+#history {
+    width: 25%;
+    float: left;
+}
+
+#streak-chart {
+    width: 75%;
+    float: right;
+}
