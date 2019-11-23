@@ -48,17 +48,17 @@ $(document).ready(() => {
 
         // format dates using helper func from above
         for (let i in data.labels) {
-            console.log(data.labels[i]);
+            // console.log(data.labels[i]);
             data.labels[i] = formatDateStringForChart(data.labels[i]);
 
-            // console.log(data.labels[i]);
         }
         
         let sentimentChart = new Chart(ctx, {
-                                            type: 'bar',
-                                            data: data,
-                                            options: options
-                                            });
+                                    type: 'bar',
+                                    data: data,
+                                    options: options
+                                    });
+  
         
         
         // $('#chartLegend').html(happyChart.generateLegend());

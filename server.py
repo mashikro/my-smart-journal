@@ -15,6 +15,8 @@ from streak import main
 from happiness import get_happiness_data
 
 from aws_comprehend import do_sentiment_analysis
+
+from aws_comp_key_phrases import create_actions_dict
  
 #################### FLASK APP SET-UP ####################################
 app = Flask(__name__)
@@ -359,7 +361,8 @@ def show_action_data():
     user_id = session.get('user_id')
     
     if user_id:
-        return render_template('action.html') #make this page
+        return render_template('action.html') 
+
     else:
         return redirect('/')
 
@@ -371,29 +374,32 @@ def get_action_data():
     #user session to get which user
     user_id = session.get('user_id')
 
-    # call func and pass in user_id as param
+    # call func and pass in user_id as param 
+    result = create_actions_dict(user_id) # returns dict
+
+    user_data = list(result[0].keys())
+    frequency = list(result[0].values())
+    print('============================')
+    print('THIS IS USER DATA', user_data)
+    print('THIS IS FREQUENCY', frequency)
+    print('THESE ARE THE DATAES', result[1])
     
     #format data appropriately
     # data_dict = {
-    #     "labels": result[0],
+    #     # "labels": result[1],
     #     "datasets": [
-    #         {
-    #         "label": "Postive",
-    #         "backgroundColor": "#d4c1ec",
-    #         "data": positives
-    #         },
-    #         {
-    #         "label": "Negative",
-    #         "backgroundColor": "#9f9fed",
-    #         "data": negatives
-    #         }, 
-    #         {
-    #         "label": "Neutral",
-    #         "backgroundColor": "#736ced",
-    #         "data": neutrals
-    #         }
-    #     ]
-    # }
+    #             {
+    #           "label": user_data,
+    #           "backgroundColor": "rgba(255,221,50,0.2)",
+    #           "borderColor": "rgba(255,221,50,1)",
+    #           "dataz": [{
+    #             "x": result[1],
+    #             "y": frequency,
+    #             "r": frequency
+    #                 }]
+    #             }   
+    #         ]
+    #     }
 
     # return jsonify(data_dict)
 

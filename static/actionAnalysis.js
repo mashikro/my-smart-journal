@@ -1,4 +1,9 @@
 "use strict";
+let formatDateStringForChart = (s) => {
+    let d = new Date(s);
+    return d.toDateString();
+};
+
 
 $(document).ready(() => {
     console.log("document.ready");
@@ -19,7 +24,7 @@ $(document).ready(() => {
         yAxes: [{
             ticks: {
                 suggestedMin: 0,
-                stepSize: 0.05
+                // stepSize: 0.05
             },
             scaleLabel: {
                 display: true,
@@ -36,8 +41,17 @@ $(document).ready(() => {
     };
 
  let ctx = $('#actionChart').get(0).getContext('2d');
-
+console.log('hi mash')
     $.getJSON("/action.json", (data) => {
+
+        console.log('are we getting the data', data)
+
+         for (let i in data.labels) {
+            console.log(data.labels[i]);
+            data.labels[i] = formatDateStringForChart(data.labels[i]);
+            console.log(data.labels[i]);
+
+        }
 
          let sentimentChart = new Chart(ctx, {
                                             type: 'bubble',
@@ -45,7 +59,7 @@ $(document).ready(() => {
                                             options: options
                                             });
 
-        }
+        });
         
         // $('#chartLegend').html(happyChart.generateLegend());
     
