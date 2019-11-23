@@ -1,6 +1,6 @@
 import boto3
 import model
-import server
+# import server
 import json
 
 def get_query(user_id):
@@ -10,16 +10,15 @@ def get_query(user_id):
     list_entries = q.journal_entries
     
     user_entries_q2 = []
-    # dates_for_entries = []
+    dates_for_entries = []
 
     for entry in list_entries:
         if len(entry.q2_text) > 5:
             user_entries_q2.append(entry.q2_text)
-            # dates_for_entries.append(entry.date)
+            dates_for_entries.append(entry.date)
 
 
-    return user_entries_q2  
-
+    return (user_entries_q2, dates_for_entries)
 
 
 def make_request(user_input):
@@ -32,37 +31,41 @@ def make_request(user_input):
         LanguageCode='en'  # |'es'|'fr'|'de'|'it'|'pt'|'ar'|'hi'|'ja'|'ko'|'zh'|'zh-TW'
     )
 
-def count_stuff(q2_entries): #input is a list
-    '''gets the count of each word'''
+
+def count_data(q2_entries): #input is a list
+    '''Returns a dict with the count of each word'''
     
     lst_of_words = []
     
     for item in q2_entries:
         lst_of_words.extend(item.split())
 
-    print('LIST OF WORDS', lst_of_words)
-
+    # print('LIST OF WORDS', lst_of_words)
 
     words_count = {}
 
-    print('WORDS COUNT DICT', words_count)
+    # print('WORDS COUNT DICT', words_count)
 
     for entry in lst_of_words:
 
         count = lst_of_words.count(entry)
         words_count[entry] = count
     
-    print('WORDS COUNT DICT 2', words_count)
+    # print('WORDS COUNT DICT 2', words_count)
     return words_count
 
-def main(user_id):
+
+def create_actions_dict(user_id):
     '''Uses helper functions to generate data for bubble chart'''
 
     user_data = get_query(user_id)
+    # print('THIS IS USER DATA', user_data)
+    dict_of_words_count = count_data(user_data[0])
 
-    print('THIS IS USER DATA', user_data)
+    return (dict_of_words_count, user_data[1])
 
-    dict_of_count = count_stuff(user_data)
+
+
 
 if __name__ == '__main__': 
     app = server.app
