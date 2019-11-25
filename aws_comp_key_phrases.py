@@ -1,6 +1,5 @@
 import boto3
 import model
-# import server
 import json
 
 def get_query(user_id):
@@ -20,7 +19,7 @@ def get_query(user_id):
 
     return (user_entries_q2, dates_for_entries)
 
-
+#this function is not being used yet
 def make_request(user_input):
     '''Makes a request to AWS Comprehend API and returns a response object'''
 
@@ -40,31 +39,25 @@ def count_data(q2_entries): #input is a list
     for item in q2_entries:
         lst_of_words.extend(item.split())
 
-    # print('LIST OF WORDS', lst_of_words)
-
     words_count = {}
 
-    # print('WORDS COUNT DICT', words_count)
-
     for entry in lst_of_words:
+        if len(entry) >3:
 
-        count = lst_of_words.count(entry)
-        words_count[entry] = count
+            count = lst_of_words.count(entry)
+            words_count[entry] = count
     
-    # print('WORDS COUNT DICT 2', words_count)
     return words_count
 
 
-def create_actions_dict(user_id):
-    '''Uses helper functions to generate data for bubble chart'''
+def create_actions_list(user_id):
+    '''Uses helper functions to generate data for word cloud'''
 
     user_data = get_query(user_id)
-    # print('THIS IS USER DATA', user_data)
-    dict_of_words_count = count_data(user_data[0])
+    
+    dict_words_count = count_data(user_data[0])
 
-    return (dict_of_words_count, user_data[1])
-
-
+    return (dict_words_count, user_data[1])
 
 
 if __name__ == '__main__': 
