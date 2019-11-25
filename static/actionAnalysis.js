@@ -41,7 +41,7 @@ $(document).ready(() => {
     };
 
  let ctx = $('#actionChart').get(0).getContext('2d');
-console.log('hi mash')
+    console.log('hi mash')
     $.getJSON("/action.json", (data) => {
 
         console.log('are we getting the data', data)
