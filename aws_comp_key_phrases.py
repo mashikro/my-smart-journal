@@ -40,10 +40,11 @@ def count_data(q2_entries): #input is a list
         lst_of_words.extend(item.split())
 
     words_count = {}
-
+    words_to_ignore = {'the', 'a', 'is', 'with', 'for', 'an' 'and', 'or', 'of', 'to', 'on', 'my', 'they', 'i'}
+    
     for entry in lst_of_words:
-        if len(entry) >3:
-
+        # entry = entry.lower()
+        if not (entry in words_to_ignore):
             count = lst_of_words.count(entry)
             words_count[entry] = count
     

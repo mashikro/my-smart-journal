@@ -33,7 +33,7 @@ $(document).ready(() => {
             backgroundColor: '#f2dfd7', 
             fontFamily: 'Times, serif',
             weightFactor: function (size) {
-                return size*20;
+                return size*30;
             }
 
                             }); 

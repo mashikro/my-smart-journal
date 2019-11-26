@@ -12,7 +12,7 @@ $(document).ready(() => {
         },
         title: {
                 display: true,
-                text: 'Your Happiness Trend'
+                text: 'Your Happiness Trend', 
         },
       scales: {
         yAxes: [{

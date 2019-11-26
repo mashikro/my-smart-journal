@@ -9,6 +9,33 @@
             <!-- <div id="chartLegend"></div> -->
         </div>
     </div>
+<!--     <div class="row">  
+        <p>
+          <a class="btn btn-primary" data-toggle="collapse" href="#multiCollapseExample1" role="button" aria-expanded="false" aria-controls="multiCollapseExample1" id='streak-how-button'>Tell me more about happiness!</a>
+        </p>
+        <div class="row">
+          <div class="col">
+            <div class="collapse multi-collapse" id="multiCollapseExample1">
+              <div class="card card-body" style="width:50%;" id='streak-how-body'>
+                
+              </div>
+            </div>
+          </div>
+        </div>
+    </div> -->
+</div>
+
+<br />
+<br />
+
+<div class="container">
+  <!-- <div class="row"> -->
+    <div class="chart-container">
+      <div id="word-cloud-header"><b>Learn about what makes you happy:</b></div>
+      <canvas id="actionChart" style=" width: 75%;"></canvas>
+    </div> 
+  <!-- </div> -->
+
     <div class="row">  
         <p>
           <a class="btn btn-primary" data-toggle="collapse" href="#multiCollapseExample1" role="button" aria-expanded="false" aria-controls="multiCollapseExample1" id='streak-how-button'>Tell me more about happiness!</a>
@@ -17,17 +44,24 @@
           <div class="col">
             <div class="collapse multi-collapse" id="multiCollapseExample1">
               <div class="card card-body" style="width:50%;" id='streak-how-body'>
-                Your happiness graph is visualized by using the happiness score you enter when you make a journal entry. This is the history of your happiness. You may see 1 - 2 happiness score for each day. 
+               <ul>
+                  <li> Your happiness graph is visualized by using the happiness score you enter when you make a journal entry. This is the history of your happiness. You may see 1 - 2 happiness score for each day.  </li>
+                  <li>The word cloud is visualized by using your input for question 2 of morning and night entry: What are three things you can do to make today great? and How could I have made today better?</li>
+                  <li>The way word cloud works is words that are mentioned more frequently tent to be larger and words mentioned less frequently tend to be smaller.</li>
+                </ul>
               </div>
             </div>
           </div>
         </div>
     </div>
+</div> 
 </div>
+
 
 {% endblock %}
 
 
 {% block script %}
 <script src="/static/happy.js"></script>
+<script src="/static/wordCloud.js"></script>
 {% endblock %}

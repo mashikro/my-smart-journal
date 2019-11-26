@@ -35,3 +35,16 @@
     width: 75%;
     float: right;
 }
+
+#word-cloud-header {
+    font-family: 'Helvetica Neue';
+    font-size: 12;
+    /*text-align: center;*/
+    padding-left: 280px;
+    /*color: #6c757d;*/
+    color: #54585c;
+}
+
+#actionChart {
+    padding-left: 100px;  
+}
