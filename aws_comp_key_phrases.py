@@ -1,6 +1,10 @@
 import boto3
 import model
 import json
+# import server
+
+client = boto3.client('comprehend') 
+
 
 def get_query(user_id):
     '''Use user_id to get user's journal entries for analysis'''
@@ -16,20 +20,27 @@ def get_query(user_id):
             user_entries_q2.append(entry.q2_text)
             dates_for_entries.append(entry.date)
 
-
+    print('User entries to Q22222', user_entries_q2)
     return (user_entries_q2, dates_for_entries)
 
 #this function is not being used yet
 def make_request(user_input):
     '''Makes a request to AWS Comprehend API and returns a response object'''
 
-    client = boto3.client('comprehend') 
-
     response = client.detect_key_phrases(
         Text= user_input, #this needs to be a str
         LanguageCode='en'  # |'es'|'fr'|'de'|'it'|'pt'|'ar'|'hi'|'ja'|'ko'|'zh'|'zh-TW'
     )
 
+# def detect_key_phrases(user_data_as_list):
+
+#     response_objects = []
+
+#     for single_data in user_data_as_list:
+#         response = make_request(single_data)
+#         response_objects.append(response)
+
+#     return response_objects
 
 def count_data(q2_entries): #input is a list
     '''Returns a dict with the count of each word'''
@@ -57,6 +68,10 @@ def create_actions_list(user_id):
     user_data = get_query(user_id)
     
     dict_words_count = count_data(user_data[0])
+
+    print('USER_DATA[0]', user_data[0])
+
+    print('LOOOOOOOOOK HERE MASHA', make_request(set(user_data[0])))
 
     return (dict_words_count, user_data[1])
 
