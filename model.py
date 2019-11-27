@@ -56,14 +56,37 @@ class JournalEntry(db.Model):
                                                     entry_type=self.entry_type,
                                                     entry_id=self.entry_id,
                                                     user_email=self.user.email)
+################# EXAMPLE DATA FOR TESTING #####################
+def example_data():
+    """Create some sample data."""
+
+    some_user = User(user_id=1,
+                    fname='Misha', 
+                    lname='Bear', 
+                    email='mbear@gmail.com', 
+                    password_hash='123', 
+                    phone_number="3475123182", 
+                    texting_enabled=True)
+
+    an_entry = JournalEntry(entry_id=1,
+                            user_id=1,
+                            entry_type='morning', 
+                            date="11/27/2019",
+                            q1_text="happy, smiley",
+                            q2_text="study",
+                            q3_text="I am smart",
+                            happ_score=5)
+
+    db.session.add_all([some_user, an_entry])
+    db.session.commit()
 
 ############## CONNECTING TO DATABASE ##########################
 
-def connect_to_db(app):
+def connect_to_db(app, dbname):
     """Connect the database to our Flask app."""
 
     # Configure to use our PostgreSQL database
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql:///journals'
+    app.config['SQLALCHEMY_DATABASE_URI'] = f'postgresql:///{dbname}'
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     app.config['SQLALCHEMY_ECHO'] = True
     db.app = app
@@ -76,5 +99,5 @@ if __name__ == "__main__":
 
     from server import app 
 
-    connect_to_db(app)
+    connect_to_db(app, "journals")
     print("Connected to DB.")
