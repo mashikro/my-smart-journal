@@ -391,7 +391,7 @@ if __name__ == "__main__":
    
     app.debug=True # We have to set debug=True here, since it has to be True at the point that we invoke the DebugToolbarExtension
 
-    connect_to_db(app)
+    connect_to_db(app, "journals")
 
     DebugToolbarExtension(app) # Use the DebugToolbar
 
