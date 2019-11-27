@@ -64,7 +64,7 @@ def example_data():
                     fname='Misha', 
                     lname='Bear', 
                     email='mbear@gmail.com', 
-                    password_hash='123', 
+                    password_hash=b'123', 
                     phone_number="3475123182", 
                     texting_enabled=True)
 
