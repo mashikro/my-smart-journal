@@ -2,16 +2,114 @@
 {% block content %}
 <h1>Welcome to My Smart Journal</h1>
 
-<!-- <h2><a href='/login'>Login</a></h2> -->
-<!-- <h2><a href='/create-account'>Create Account</a></h2>  -->
+
+<button type="button" class="btn btn-secondary btn-lg btn-block" id="LoginButton">Login</button>
+<button type="button" class="btn btn-secondary btn-lg btn-block" id="CreateAccountButton">Create Account</button>
+      
+        <!-- LOGIN -->
+<div id='loginForm'>
+    <form action='/login' method='POST'>
+        <div>
+            <label>
+                Email
+                <input type="email" name="email">
+            </label>
+        </div>
+
+        <br>
+        
+        <div>
+            <label>
+                Password
+                <input type="password" name="password">
+            </label>
+        </div>
+        
+        <br>
+        
+        <div>
+            <input type="submit" value="Submit">
+        </div>
+
+    </form>
+</div>
+
+<!-- CREATE ACCOUNT -->
+
+<div id='createAccountForm'>
+    <form action='/create-account' method='POST'>
+
+        <div>
+            <label>
+                Email
+                <input type="email" name="email" autocomplete="off" required />
+            </label>
+        </div>
+        
+        <br>
+        
+        <div>
+            <label>
+                Password
+                <input type="password" name="password" autocomplete="off" required />
+            </label>
+        </div>
+        
+        <br>
+
+        <div>
+            <label>
+                First Name
+                <input type="text" name="fname" autocomplete="off" required />
+            </label>
+        </div>
+        
+        <br>
+
+        <div>
+            <label>
+                Last Name
+                <input type="text" name="lname" autocomplete="off" required />
+            </label>
+        </div>
+        
+        <br>
+
+        <div>
+            <label>
+                Phone Number
+                <input type="tel" name="phone_number" placeholder="111 111 1111" pattern="[0-9]{3} [0-9]{3} [0-9]{4}" autocomplete="off" required />
+            </label>
+        </div>
+
+        <br>
+
+        <div>
+            <label>
+                Enable Texting
+                <input type="radio" name="texting_enabled" value='true' />Yes
+                <input type="radio" name="texting_enabled" value='false' />No
+            </label>
+        </div>
+        
+        <br>
+        
+        <div>
+            <input type="submit" value="Submit" />
+        </div>
 
 
-<button type="button" class="btn btn-secondary btn-lg btn-block"> <a href='/login'>Login</a> </button>
-<button type="button" class="btn btn-secondary btn-lg btn-block"><a href='/create-account'>Create Account</a></button>
+    </form>
+</div>
 
 <!-- <div style="width:50%;">
     <img src="/static/journal_coffee.jpg" />
 </div>
  -->
 
+{% endblock %}
+
+
+{% block script %}
+<script src="/static/index.js"></script>
 {% endblock %}
