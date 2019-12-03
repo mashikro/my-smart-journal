@@ -261,16 +261,16 @@ def get_happ_stats():
     return jsonify(data_dict)
 
 
-@app.route('/streak')
-def show_streak_chart():
-    '''Show streak data page'''    
+# @app.route('/streak')
+# def show_streak_chart():
+#     '''Show streak data page'''    
 
-    user_id = session.get('user_id')
+#     user_id = session.get('user_id')
     
-    if user_id:
-        return render_template('streak.html')    
-    else:
-        return redirect('/')
+#     if user_id:
+#         return render_template('streak.html')    
+#     else:
+#         return redirect('/')
     
 
 @app.route('/streak.json')
@@ -354,17 +354,17 @@ def get_sentiment_analysis_data():
     return jsonify(data_dict)
 
 
-@app.route('/action')
-def show_action_data():
-    '''Show user data where sentiment analysis was performed'''    
+# @app.route('/action')
+# def show_action_data():
+#     '''Show user data where sentiment analysis was performed'''    
 
-    user_id = session.get('user_id')
+#     user_id = session.get('user_id')
     
-    if user_id:
-        return render_template('action.html') 
+#     if user_id:
+#         return render_template('action.html') 
 
-    else:
-        return redirect('/')
+#     else:
+#         return redirect('/')
 
 
 @app.route('/action.json')
