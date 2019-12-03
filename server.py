@@ -153,10 +153,18 @@ def process_journal_entry():
     #get data from form
     date = request.form.get('date')
     entry_type = request.form.get('entry_type')
-    q1_text = request.form.get('q1_entry')
-    q2_text = request.form.get('q2_entry')
-    q3_text = request.form.get('q3_entry')
+    q1_text = request.form.get('mor_q1_entry')
+    q2_text = request.form.get('mor_q2_entry')
+    q3_text = request.form.get('mor_q3_entry')
     happ_score = request.form.get('happ_score')
+
+   
+    if len(q1_text) < 1:
+        q1_text = request.form.get('night_q1_entry')
+    if len(q2_text) < 1:
+        q2_text = request.form.get('night_q2_entry')
+    if len(q3_text) < 1:
+        q3_text = request.form.get('night_q3_entry')
 
     #using that data instantiate a new journal entry
     new_journal_entry = JournalEntry(user_id = session['user_id'],
