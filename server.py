@@ -124,7 +124,7 @@ def login_process():
 
 @app.route('/logout')
 def logout_process():
-    '''Log user out'''
+    '''Log user out and remove from session'''
     user_id = session.get('user_id')
     
     if user_id:
@@ -136,7 +136,7 @@ def logout_process():
 
 @app.route('/home', methods=['GET'])
 def show_homepage():
-    '''Homepage. User's can make entries to the journal here '''
+    '''Homepage. User's can make journal entries'''
 
     user_id = session.get('user_id')
 
@@ -153,27 +153,35 @@ def process_journal_entry():
     #get data from form
     date = request.form.get('date')
     entry_type = request.form.get('entry_type')
-    q1_text = request.form.get('mor_q1_entry')
-    q2_text = request.form.get('mor_q2_entry')
-    q3_text = request.form.get('mor_q3_entry')
+    
+    q1_text_mor = request.form.get('mor_q1_entry')
+    q2_text_mor = request.form.get('mor_q2_entry')
+    q3_text_mor = request.form.get('mor_q3_entry')
+    
+    q1_text_night = request.form.get('night_q1_entry')
+    q2_text_night = request.form.get('night_q2_entry')
+    q3_text_night = request.form.get('night_q3_entry')
+
     happ_score = request.form.get('happ_score')
-
    
-    if len(q1_text) < 1:
-        q1_text = request.form.get('night_q1_entry')
-    if len(q2_text) < 1:
-        q2_text = request.form.get('night_q2_entry')
-    if len(q3_text) < 1:
-        q3_text = request.form.get('night_q3_entry')
 
-    #using that data instantiate a new journal entry
-    new_journal_entry = JournalEntry(user_id = session['user_id'],
-                                    date=date,
-                                    entry_type=entry_type,
-                                    q1_text=q1_text,
-                                    q2_text=q2_text,
-                                    q3_text=q3_text,
-                                    happ_score=happ_score)
+    #using that data instantiate a new journal entry depending on entry type
+    if entry_type == 'morning':
+        new_journal_entry = JournalEntry(user_id = session['user_id'],
+                                        date=date,
+                                        entry_type=entry_type,
+                                        q1_text=q1_text_mor,
+                                        q2_text=q2_text_mor,
+                                        q3_text=q3_text_mor,
+                                        happ_score=happ_score)
+    else:
+        new_journal_entry = JournalEntry(user_id = session['user_id'],
+                                date=date,
+                                entry_type=entry_type,
+                                q1_text=q1_text_night,
+                                q2_text=q2_text_night,
+                                q3_text=q3_text_night,
+                                happ_score=happ_score)
 
     # add and commit to backend
     db.session.add(new_journal_entry)
@@ -184,7 +192,7 @@ def process_journal_entry():
 
 @app.route('/history')
 def show_history():
-    '''History of all entries'''
+    '''History of all entries. Users can sort/filter. Graph of streaks are displayed'''
 
     user_id = session.get('user_id')
     journal_entries = JournalEntry.query.filter_by(user_id=user_id)
@@ -211,7 +219,7 @@ def show_history():
 
 @app.route('/view-entry/<int:entry_id>')
 def show_single_entry(entry_id):
-    '''Single entry'''
+    '''View single entry'''
 
     single_journal_entry = JournalEntry.query.filter_by(entry_id=entry_id).first()
 
@@ -233,7 +241,7 @@ def view_profile():
 
 @app.route('/happy')
 def show_happ_chart():
-    '''Show happiness data page'''
+    '''Show happiness data. Show actionable items through word cloud.'''
 
     user_id = session.get('user_id')
     
@@ -245,7 +253,7 @@ def show_happ_chart():
 
 @app.route('/happy.json')
 def get_happ_stats():
-    '''Get data ready for happiness page'''
+    '''Get data ready for happiness graph'''
 
     #user session to get which user
     user_id = session.get('user_id')
@@ -283,7 +291,7 @@ def get_happ_stats():
 
 @app.route('/streak.json')
 def get_streak_stats():
-    '''Get data ready for streak page'''
+    '''Get data ready for streak graph'''
   
     #user session to get which user
     user_id = session.get('user_id')
@@ -320,7 +328,7 @@ def show_sentiment_analysis_data():
 
 @app.route('/sentiment-analysis.json')
 def get_sentiment_analysis_data():
-    '''Get data ready for sentiment analysis page'''
+    '''Get data ready for sentiment analysis graph'''
   
     #user session to get which user
     user_id = session.get('user_id')
@@ -377,7 +385,7 @@ def get_sentiment_analysis_data():
 
 @app.route('/action.json')
 def get_action_data():
-    '''Get data ready for sentiment analysis page'''
+    '''Get data ready for happiness/action world cloud'''
   
     #user session to get which user
     user_id = session.get('user_id')
