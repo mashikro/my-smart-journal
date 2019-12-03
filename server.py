@@ -41,11 +41,11 @@ def index():
     return render_template('index.html') 
 
 
-@app.route('/create-account', methods=['GET'])
-def create_account_form():
-    '''User's can create an account'''
+# @app.route('/create-account', methods=['GET'])
+# def create_account_form():
+#     '''User's can create an account'''
 
-    return render_template('create_account_form.html')
+#     return render_template('create_account_form.html')
 
 
 @app.route('/create-account', methods=['POST'])
@@ -67,7 +67,7 @@ def create_user_process():
         flash('''Sorry this email is already being used. 
             Try again with a different email address.''')
         
-        return redirect('/create-account')
+        return redirect('/')
     
 #Instatitate a new user add and commit them to db
     new_user = User(email=email, 
@@ -80,14 +80,14 @@ def create_user_process():
     db.session.add(new_user)
     db.session.commit()
  
-    return redirect('/login')
+    return redirect('/')
 
 
-@app.route('/login', methods=['GET'])
-def login_form():
-    '''Login form'''
+# @app.route('/login', methods=['GET'])
+# def login_form():
+#     '''Login form'''
     
-    return render_template('login_form.html')
+#     return render_template('login_form.html')
 
 
 @app.route('/login', methods=['POST'])
@@ -104,7 +104,7 @@ def login_process():
 #User authentication
     if not user:
         flash("Sorry, the user with that email doesn't exist. Please try again :) ")
-        return redirect('/login')
+        return redirect('/')
    
     if bcrypt.checkpw((password.encode('utf-8')), user.password_hash): #this checks if the entered pass matches decrypted pass_hash
         # Will add user to session
@@ -119,7 +119,7 @@ def login_process():
     # if pass doesnt match:
     else:
         flash('Oops :0 Incorrect password! Please try again :)')
-        return redirect('/login')
+        return redirect('/')
 
 
 @app.route('/logout')
