@@ -390,12 +390,10 @@ def get_action_data():
     #user session to get which user
     user_id = session.get('user_id')
 
-    # call func and pass in user_id as param 
-    result = create_actions_list(user_id) # returns dict
+    # call func and pass in user_id as param & get a dict back
+    result = create_actions_list(user_id) 
 
-    list_words = list(result[0].items())
-
-    # print('IS THIS COMING IN RIGHT', list_words)
+    list_words = list(result.items())
 
     data = {'data': list_words}
 
