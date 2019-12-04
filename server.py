@@ -272,7 +272,9 @@ def get_happ_stats():
                     "label": 'Happiness Trend',
                     "borderColor": "#fef9ff",
                     "data": result[1],
-                    "backgroundColor": "#d4c1ec",
+                    # "backgroundColor": "#d4c1ec",
+                    "backgroundColor": "#71EDCE",
+
                     "hoverBackgroundColor": "#FF6384",
                 }]
         }
@@ -309,7 +311,9 @@ def get_streak_stats():
                 "label": 'Streak Trend',
                 "borderColor": "#fef9ff",
                 "data": result[1],
-                "backgroundColor": "#d4c1ec",
+                # "backgroundColor": "#d4c1ec",
+                "backgroundColor": "#71EDCE",
+
                 "hoverBackgroundColor": "#FF6384"  
             }]
     }
@@ -354,17 +358,17 @@ def get_sentiment_analysis_data():
         "datasets": [
             {
             "label": "Postive",
-            "backgroundColor": "#d4c1ec",
+            "backgroundColor": "#71EDCE",
             "data": positives
             },
             {
             "label": "Negative",
-            "backgroundColor": "#9f9fed",
+            "backgroundColor": "#45eddf",
             "data": negatives
             }, 
             {
             "label": "Neutral",
-            "backgroundColor": "#736ced",
+            "backgroundColor": "#bff2e5",
             "data": neutrals
             }
         ]

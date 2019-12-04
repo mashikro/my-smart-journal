@@ -19,13 +19,6 @@
     height: 30px;
 }
 
-#streak-how-button {
-    background-color: #736ced;
-}
-
-#streak-how-body {
-    background-color: #fef9ff;
-}
 
 .btn-block {
     background: #e8e4da;
@@ -34,7 +27,8 @@
 
 .btn-sm {
     /*background: #9f9fed;*/
-    background: #d4c1ec;
+    /*background: #d4c1ec;*/
+    background: #e8e4da;
 }
 
 #history {
@@ -45,6 +39,17 @@
 #streak-chart {
     width: 75%;
     float: right;
+}
+
+#streak-how-button {
+    /*background-color: #736ced;*/
+    /*background: #e8e4da;*/
+    background: #abf4e2f0;
+
+}
+
+#streak-how-body {
+    background-color: #fef9ff;
 }
 
 #word-cloud-header {

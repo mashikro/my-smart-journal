@@ -30,7 +30,8 @@ $(document).ready(() => {
        setupCanvas(canvas);
         WordCloud(canvas, { 
             list: data['data'],   
-            backgroundColor: '#f2dfd7', 
+            // backgroundColor: '#f2dfd7', 
+            backgroundColor: "#E8F2DA",
             fontFamily: 'Times, serif',
             weightFactor: function (size) {
                 return size*30;

@@ -3,13 +3,12 @@
 <h1>History of Journal Entries</h1>
 
 <div>
-    <button type="button" class="btn btn-secondary btn-sm"><a href="/history?sort=desc">Sort Entries by Latest</a> </button>
-    <button type="button" class="btn btn-secondary btn-sm"><a href="/history?filter=night">Filter Entries by 'Night'</a> </button>
-    <button type="button" class="btn btn-secondary btn-sm"><a href="/history?filter=morning">Filter Entries by 'Morning'</a></button> <br>
+    <button type="button" class="btn btn-outline-light btn-sm"><a href="/history?sort=desc">Sort Entries by Latest</a> </button>
+    <button type="button" class="btn btn-outline-light btn-sm"><a href="/history?filter=night">Filter Entries by 'Night'</a> </button>
+    <button type="button" class="btn btn-outline-light btn-sm"><a href="/history?filter=morning">Filter Entries by 'Morning'</a></button> <br>
 </div>
 
 <span id='history'>
-<!-- <p>{{ journal_entries_lst }}</p> -->
     <ul>
         {% for journal_entry in journal_entries_lst %}
        <li> Date: {{ journal_entry.date }} </li>
@@ -27,13 +26,12 @@
         <div class="row">
             <div class="chart-container" style="width:75%;">
                 <canvas id="streakChart"></canvas>
-                <!-- <div id="chartLegend"></div> -->
             </div>
         </div>
 
     <div class="row">  
         <p>
-          <a class="btn btn-primary" data-toggle="collapse" href="#multiCollapseExample1" role="button" aria-expanded="false" aria-controls="multiCollapseExample1" id='streak-how-button'>How are streaks calculated?</a>
+          <a class="btn btn-outline-light" data-toggle="collapse" href="#multiCollapseExample1" role="button" aria-expanded="false" aria-controls="multiCollapseExample1" id='streak-how-button'>How are streaks calculated?</a>
         </p>
         <div class="row">
           <div class="col">
