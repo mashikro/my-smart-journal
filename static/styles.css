@@ -1,11 +1,22 @@
 /*Navbat background colors*/
 .navbar-custom-theme {
-  background: linear-gradient(to left, #e8f2da, #b4ebca);
+  /*background: linear-gradient(to left, #e8f2da, #b4ebca);*/
+    background: linear-gradient(to left, #71EDCE, #ADF7E9);
+
   height: 50px;
 }
 
+.navbar-brand {
+    color: #03d2f3;
+}
+
+.nav-link {
+    color: white;
+    font-size: 14pt;
+}
+
 #brand-image {
-    height: 35px;
+    height: 30px;
 }
 
 #streak-how-button {
