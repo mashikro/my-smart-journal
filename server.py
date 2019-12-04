@@ -219,11 +219,14 @@ def show_history():
 
 @app.route('/view-entry/<int:entry_id>')
 def show_single_entry(entry_id):
-    '''View single entry'''
+    '''View single entry based on entry type'''
 
     single_journal_entry = JournalEntry.query.filter_by(entry_id=entry_id).first()
 
-    return render_template('single_entry_view.html', single_journal_entry=single_journal_entry)
+    if single_journal_entry.entry_type == 'morning':
+        return render_template('single_entry_view.html', single_journal_entry=single_journal_entry)
+    else:
+        return render_template('night_single_entry_view.html', single_journal_entry=single_journal_entry)
 
 
 @app.route('/profile')
