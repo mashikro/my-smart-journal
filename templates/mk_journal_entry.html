@@ -2,7 +2,7 @@
 
 {% block content %} 
 
-<div id="centering-div-container">
+<div class="centering-div-container">
 <h1>Journal Entry</h1>
 <br />
 <form action='/home' method='POST'>
@@ -16,11 +16,12 @@
     <br />
 
     <div>
-        <label>
-            Is this a <b>morning</b> or <b>night</b> entry?
-            <input type="radio" id="morningButton" name="entry_type" value='morning' />Morning
-            <input type="radio" id="nightButton" name="entry_type" value='night' />Night
-        </label>
+        Is this a <b>morning</b> or <b>night</b> entry?
+
+        <input type="radio" id="morningButton" name="entry_type" value='morning' /><label for="morningButton">Morning</label>
+
+        <input type="radio" id="nightButton" name="entry_type" value='night' />
+        <label for="nightButton">Night</label>
     </div>
 
     <br />

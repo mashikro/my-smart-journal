@@ -1,111 +1,78 @@
 {% extends 'base.html' %}
 {% block content %}
-<h1 id="centering-div-container">Welcome to My Smart Journal</h1>
+<div id="beach-image" >
+<h1 class="centering-div-container">Welcome to My Smart Journal</h1>
 
+<button type="button" class="btn btn-lg btn-block btn-outline-light" id="LoginButton"><b>Login</b></button>
 
-<button type="button" class="btn btn-secondary btn-lg btn-block" id="LoginButton">Login</button>
-<button type="button" class="btn btn-secondary btn-lg btn-block" id="CreateAccountButton">Create Account</button>
+<button type="button" class="btn btn-lg btn-block btn-outline-light" id="CreateAccountButton"><b>Create Account</b></button>
 
 <br />  
         <!-- LOGIN -->
-<div id='loginForm' class='padding-left'>
+<div id='loginForm' class='centering-div-container'>
     <h2>Login</h2>
     <form action='/login' method='POST'>
-        <div>
+        <div class='allign-input allign-labels'>
             <label>
                 Email
                 <input type="email" name="email">
             </label>
-        </div>
 
-        <br>
-        
-        <div>
             <label>
                 Password
                 <input type="password" name="password">
             </label>
-        </div>
-        
-        <br>
-        
-        <div>
+            
+            <br>
+
             <input type="submit" value="Submit" class="btn btn-outline-success" />
         </div>
+    
     </form>
 </div>
 
 <!-- CREATE ACCOUNT -->
 
-<div id='createAccountForm' class='padding-left'>
+<div id='createAccountForm' class='centering-div-container'>
     <h2>Create Account</h2>
     <form action='/create-account' method='POST'>
-        <div>
+        <div class='allign-input allign-labels' >
             <label>
                 Email
                 <input type="email" name="email" autocomplete="off" required />
             </label>
-        </div>
-        
-        <br>
-        
-        <div>
+     
             <label>
                 Password
                 <input type="password" name="password" autocomplete="off" required />
             </label>
-        </div>
-        
-        <br>
 
-        <div>
             <label>
                 First Name
                 <input type="text" name="fname" autocomplete="off" required />
             </label>
-        </div>
-        
-        <br>
 
-        <div>
-            <label>
+             <label>
                 Last Name
                 <input type="text" name="lname" autocomplete="off" required />
             </label>
-        </div>
-        
-        <br>
 
-        <div>
             <label>
                 Phone Number
                 <input type="tel" name="phone_number" placeholder="111 111 1111" pattern="[0-9]{3} [0-9]{3} [0-9]{4}" autocomplete="off" required />
             </label>
-        </div>
 
-        <br>
-
-        <div>
             <label>
                 Enable Texting
                 <input type="radio" name="texting_enabled" value='true' />Yes
                 <input type="radio" name="texting_enabled" value='false' />No
             </label>
-        </div>
-        
-        <br>
-        
-        <div>
+            <br>
             <input type="submit" value="Submit" class="btn btn-outline-success" />
         </div>
     </form>
 </div>
 
-<!-- <div style="width:50%;">
-    <img src="/static/journal_coffee.jpg" />
-</div>
- -->
-</div>
 {% endblock %}
 
 

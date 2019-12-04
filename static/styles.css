@@ -1,6 +1,6 @@
 /*Navbat background colors*/
 .navbar-custom-theme {
-  background: linear-gradient(to left, #9f9fed, #d4c1ec);
+  background: linear-gradient(to left, #e8f2da, #b4ebca);
   height: 50px;
 }
 
@@ -17,8 +17,8 @@
 }
 
 .btn-block {
-    /*background: #9f9fed;*/
-    background: #d4c1ec;
+    background: #e8e4da;
+
 }
 
 .btn-sm {
@@ -51,18 +51,42 @@
 
 body {
     font-family: 'Inconsolata', monospace;
-    /*font-size: 14pt;*/
+    height: 100%;
+    margin: 0;
 }
 
 .journal-input-box-size {
     font-size:12pt;
 }
 
-#centering-div-container {
-    text-align: center;
-}
 
 .padding-left {
-     padding-left: 10px;
+    padding-left: 10px;
 }
+
+#beach-image {
+    width: 100%;
+    height: 100%;
+    background-image: url(lightBeach.jpg);
+    position: absolute;
+    z-index: -1;
+}
+
+.centering-div-container {
+    text-align: center;
+}
+.allign-input {
+  display: inline-block;
+  /*float: left;*/
+}
+.allign-labels {
+    display: inline-block;
+    /*float: left;*/
+    clear: left;
+    width: 320px;
+    text-align: right;
+    font-size: 14pt;
+}
+
+
 
