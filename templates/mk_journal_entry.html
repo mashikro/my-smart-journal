@@ -2,8 +2,9 @@
 
 {% block content %} 
 
+<div id="centering-div-container">
 <h1>Journal Entry</h1>
-
+<br />
 <form action='/home' method='POST'>
     <div>
         <label>
@@ -16,7 +17,7 @@
 
     <div>
         <label>
-            Is this a 'morning' or 'night' entry?
+            Is this a <b>morning</b> or <b>night</b> entry?
             <input type="radio" id="morningButton" name="entry_type" value='morning' />Morning
             <input type="radio" id="nightButton" name="entry_type" value='night' />Night
         </label>
@@ -29,21 +30,28 @@
     <div>
         <label>
             What are three things you are grateful for today?
-            <input type="text" name="mor_q1_entry" autocomplete="off" />
+           <!--  <input type="text" name="mor_q1_entry" autocomplete="off" class="journal-input-box-size" /> -->
+            <br />
+           <textarea rows="4" cols="50" name="mor_q1_entry" autocomplete="off" class="journal-input-box-size"></textarea>
         </label>
     </div>
 
     <div>
         <label> 
             What are three things you can do to make today great?
-            <input type="text" name="mor_q2_entry" autocomplete="off" />
+            <!-- <input type="text" name="mor_q2_entry" autocomplete="off" /> -->
+
+            <br />
+           <textarea rows="4" cols="50" name="mor_q2_entry" autocomplete="off" class="journal-input-box-size"></textarea>
         </label>
     </div>
 
     <div>
         <label>
-             Daily Affirmations: Write down three things about yourself that you want to reinforce (ex: I am a great software engineer)
-            <input type="text" name="mor_q3_entry" autocomplete="off" />
+             Daily Affirmations: Write down three things about yourself that you want to reinforce.
+            <!-- <input type="text" name="mor_q3_entry" autocomplete="off" /> -->
+            <br />
+           <textarea rows="4" cols="50" name="mor_q3_entry" autocomplete="off" placeholder= "ex: I am a great software engineer" class="journal-input-box-size"></textarea>
         </label>
     </div>
 </div>
@@ -54,22 +62,27 @@
     <div>
         <label>
             What are three amazing things that happened today?
-            <input type="text" name="night_q1_entry" cols="40" rows="5" autocomplete="off" />
-            <!-- <textarea name="q1_entry" cols="40" rows="2" autocomplete="off"></textarea> -->
+            <!-- <input type="text" name="night_q1_entry" cols="40" rows="5" autocomplete="off" /> -->
+            <br />
+            <textarea rows="4" cols="50" name="night_q1_entry" autocomplete="off" class="journal-input-box-size"></textarea>
         </label>
     </div>
 
     <div>
         <label> 
             How could I have made today better?
-            <input type="text" name="night_q2_entry" autocomplete="off" />
+            <!-- <input type="text" name="night_q2_entry" autocomplete="off" /> -->
+              <br />
+            <textarea rows="4" cols="50" name="night_q2_entry" autocomplete="off" class="journal-input-box-size"></textarea>
         </label>
     </div>
 
     <div>
         <label>
-             What is one kind thing you did for yourself or someone else today?
-            <input type="text" name="night_q3_entry" autocomplete="off" />
+             What is one kind thing I did for myself or someone else today?
+            <!-- <input type="text" name="night_q3_entry" autocomplete="off" /> -->
+              <br />
+            <textarea rows="4" cols="50" name="night_q3_entry" autocomplete="off" class="journal-input-box-size"></textarea>
         </label>
     </div>
 </div>
@@ -88,7 +101,7 @@
         <input type="submit" value="Submit" class="btn btn-outline-success" />
     </div> 
 </form>
-
+</div>
 {% endblock %}
 
 

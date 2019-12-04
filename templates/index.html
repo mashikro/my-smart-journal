@@ -1,15 +1,15 @@
 {% extends 'base.html' %}
 {% block content %}
-<h1>Welcome to My Smart Journal</h1>
+<h1 id="centering-div-container">Welcome to My Smart Journal</h1>
 
-<div id="index-beach-img">
 
 <button type="button" class="btn btn-secondary btn-lg btn-block" id="LoginButton">Login</button>
 <button type="button" class="btn btn-secondary btn-lg btn-block" id="CreateAccountButton">Create Account</button>
 
 <br />  
         <!-- LOGIN -->
-<div id='loginForm'>
+<div id='loginForm' class='padding-left'>
+    <h2>Login</h2>
     <form action='/login' method='POST'>
         <div>
             <label>
@@ -37,7 +37,8 @@
 
 <!-- CREATE ACCOUNT -->
 
-<div id='createAccountForm'>
+<div id='createAccountForm' class='padding-left'>
+    <h2>Create Account</h2>
     <form action='/create-account' method='POST'>
         <div>
             <label>

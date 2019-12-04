@@ -37,7 +37,7 @@
 }
 
 #word-cloud-header {
-    font-family: 'Helvetica Neue';
+    font-family: 'Inconsolata', monospace;
     font-size: 12;
     /*text-align: center;*/
     padding-left: 280px;
@@ -48,3 +48,21 @@
 #actionChart {
     padding-left: 100px;  
 }
+
+body {
+    font-family: 'Inconsolata', monospace;
+    /*font-size: 14pt;*/
+}
+
+.journal-input-box-size {
+    font-size:12pt;
+}
+
+#centering-div-container {
+    text-align: center;
+}
+
+.padding-left {
+     padding-left: 10px;
+}
+
