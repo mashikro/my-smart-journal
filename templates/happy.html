@@ -1,12 +1,10 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div class="container">
+<div class="container centering-div-container">
     <div class="row">
         <div class="chart-container" style="width:75%;">
             <canvas id="happyChart"></canvas>
-            
-            <!-- <div id="chartLegend"></div> -->
         </div>
     </div>
 
@@ -18,7 +16,9 @@
 <div class="container">
   <!-- <div class="row"> -->
     <div class="chart-container">
-      <div id="word-cloud-header"><b>Learn about what makes you happy:</b></div>
+      <div id="word-cloud-header">
+        <b>Learn about what makes you happy:</b>
+      </div>
       <canvas id="actionChart" style=" width: 75%;"></canvas>
     </div> 
   <!-- </div> -->
@@ -33,8 +33,8 @@
               <div class="card card-body" style="width:50%;" id='streak-how-body'>
                <ul>
                   <li> Your happiness graph is visualized by using the happiness score you enter when you make a journal entry. This is the history of your happiness. You may see 1 - 2 happiness score for each day.  </li>
-                  <li>The word cloud is visualized by using your input for question 2 of morning and night entry: What are three things you can do to make today great? and How could I have made today better?</li>
-                  <li>The way word cloud works is words that are mentioned more frequently tent to be larger and words mentioned less frequently tend to be smaller.</li>
+                  <li>The word cloud is visualized by using your input for question 2 of morning and night entry: -What are three things you can do to make today great?- and -How could I have made today better?-</li>
+                  <li>The way word cloud works is, words that are mentioned more frequently tent to be larger and words mentioned less frequently tend to be smaller.</li>
                 </ul>
               </div>
             </div>
@@ -42,7 +42,7 @@
         </div>
     </div>
 </div> 
-</div>
+
 
 
 {% endblock %}
