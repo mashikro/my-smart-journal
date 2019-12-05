@@ -272,10 +272,8 @@ def get_happ_stats():
                     "label": 'Happiness Trend',
                     "borderColor": "#fef9ff",
                     "data": result[1],
-                    # "backgroundColor": "#d4c1ec",
                     "backgroundColor": "#71EDCE",
-
-                    "hoverBackgroundColor": "#FF6384",
+                    "hoverBackgroundColor": "#71EDCE",
                 }]
         }
 
@@ -311,10 +309,8 @@ def get_streak_stats():
                 "label": 'Streak Trend',
                 "borderColor": "#fef9ff",
                 "data": result[1],
-                # "backgroundColor": "#d4c1ec",
                 "backgroundColor": "#71EDCE",
-
-                "hoverBackgroundColor": "#FF6384"  
+                "hoverBackgroundColor": "#71EDCE",
             }]
     }
 
@@ -342,6 +338,8 @@ def get_sentiment_analysis_data():
 
     # call func and pass in user_id as param
     result = do_sentiment_analysis(user_id)
+
+    print('loook here masha', result[0])
     
     positives = []
     negatives = []
@@ -363,12 +361,12 @@ def get_sentiment_analysis_data():
             },
             {
             "label": "Negative",
-            "backgroundColor": "#45eddf",
+            "backgroundColor": "#CC3553",
             "data": negatives
             }, 
             {
             "label": "Neutral",
-            "backgroundColor": "#bff2e5",
+            "backgroundColor": "#F2DC5D",
             "data": neutrals
             }
         ]

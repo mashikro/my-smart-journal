@@ -54,8 +54,6 @@ def organize_reponse_objects(responses):
     for response in responses:
         sentiment_score.append((response['SentimentScore']))
 
-    print('THIS IS THE SENTIMENT SCORE', sentiment_score)
-
     return sentiment_score
 
 
