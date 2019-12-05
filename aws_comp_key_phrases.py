@@ -25,11 +25,17 @@ def count_data(q2_entries):
     for item in q2_entries:
         lst_of_words.extend(item.split())
 
-    words_count = {}
-    words_to_ignore = {'the', 'a', 'is', 'with', 'for', 'an' 'and', 'or', 'of', 'to', 'on', 'my', 'they', 'i', 'more', 'many'}
+    words_to_ignore = {'the', 'a', 'is', 'with', 'for', 'an' 'and', 'or', 'of', 'to', 'on', 'my', 
+                        'they', 'i', 'more', 'many', 'while', 'lot', 'much', 'be', 'out', 'am'}
+    
+    new_lst_words = []
     
     for entry in lst_of_words:
-        # entry = entry.lower()
+        new_lst_words.append(entry.lower())
+
+    words_count = {}
+    
+    for entry in new_lst_words:
         if not (entry in words_to_ignore):
             count = lst_of_words.count(entry)
             words_count[entry] = count
