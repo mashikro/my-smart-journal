@@ -41,13 +41,6 @@ def index():
     return render_template('index.html') 
 
 
-# @app.route('/create-account', methods=['GET'])
-# def create_account_form():
-#     '''User's can create an account'''
-
-#     return render_template('create_account_form.html')
-
-
 @app.route('/create-account', methods=['POST'])
 def create_user_process():
     '''Add user to the database'''
@@ -81,13 +74,6 @@ def create_user_process():
     db.session.commit()
  
     return redirect('/')
-
-
-# @app.route('/login', methods=['GET'])
-# def login_form():
-#     '''Login form'''
-    
-#     return render_template('login_form.html')
 
 
 @app.route('/login', methods=['POST'])
@@ -278,18 +264,6 @@ def get_happ_stats():
         }
 
     return jsonify(data_dict)
-
-
-# @app.route('/streak')
-# def show_streak_chart():
-#     '''Show streak data page'''    
-
-#     user_id = session.get('user_id')
-    
-#     if user_id:
-#         return render_template('streak.html')    
-#     else:
-#         return redirect('/')
     
 
 @app.route('/streak.json')
@@ -339,7 +313,11 @@ def get_sentiment_analysis_data():
     # call func and pass in user_id as param
     result = do_sentiment_analysis(user_id)
 
-    print('loook here masha', result[0])
+    # print('loook here masha', result[0])
+    
+    # dates = []
+    # for date in result[0]:
+    #     dates.append(date.isoformat())
     
     positives = []
     negatives = []
@@ -375,19 +353,6 @@ def get_sentiment_analysis_data():
     return jsonify(data_dict)
 
 
-# @app.route('/action')
-# def show_action_data():
-#     '''Show user data where sentiment analysis was performed'''    
-
-#     user_id = session.get('user_id')
-    
-#     if user_id:
-#         return render_template('action.html') 
-
-#     else:
-#         return redirect('/')
-
-
 @app.route('/action.json')
 def get_action_data():
     '''Get data ready for happiness/action world cloud'''
@@ -408,7 +373,7 @@ def get_action_data():
 ####################### RUNNING MY SERVER ###############################
 if __name__ == "__main__":
    
-    app.debug=True # We have to set debug=True here, since it has to be True at the point that we invoke the DebugToolbarExtension
+    app.debug=False # We have to set debug=True here, since it has to be True at the point that we invoke the DebugToolbarExtension
 
     connect_to_db(app, "journals")
 

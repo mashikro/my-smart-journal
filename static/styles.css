@@ -1,6 +1,5 @@
 /*Navbat background colors*/
 .navbar-custom-theme {
-  /*background: linear-gradient(to left, #e8f2da, #b4ebca);*/
     background: linear-gradient(to left, #71EDCE, #ADF7E9);
 
   height: 50px;
@@ -42,8 +41,6 @@
 }
 
 #streak-how-button {
-    /*background-color: #736ced;*/
-    /*background: #e8e4da;*/
     background: #abf4e2f0;
 
 }
@@ -55,9 +52,7 @@
 #word-cloud-header {
     font-family: 'Inconsolata', monospace;
     font-size: 12;
-    /*text-align: center;*/
     padding-left: 280px;
-    /*color: #6c757d;*/
     color: #54585c;
 }
 
@@ -93,11 +88,10 @@ body {
 }
 .allign-input {
   display: inline-block;
-  /*float: left;*/
 }
+
 .allign-labels {
     display: inline-block;
-    /*float: left;*/
     clear: left;
     width: 320px;
     text-align: right;
