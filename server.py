@@ -312,12 +312,6 @@ def get_sentiment_analysis_data():
 
     # call func and pass in user_id as param
     result = do_sentiment_analysis(user_id)
-
-    # print('loook here masha', result[0])
-    
-    # dates = []
-    # for date in result[0]:
-    #     dates.append(date.isoformat())
     
     positives = []
     negatives = []
