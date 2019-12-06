@@ -1,7 +1,7 @@
 import server
 import model
 import os
-import twilio
+from twilio.rest import Client
 import schedule
 import time
 import datetime
@@ -13,7 +13,7 @@ TWILIO_PNUM = os.environ['TWILIO_PHONE_NUMBER']
 def check_for_credentials(account_sid, auth_token):
     '''Checks to validate our credentials.''' 
     if ((len(account_sid) < 1) or (len(auth_token) < 1)):
-        raise Exception("failed to read twilio auth fron environ.")
+        raise Exception("Failed to read twilio auth fron environ.")
     else: 
         print('Account Sid and Auth token are good to go :)')
 
@@ -31,11 +31,11 @@ def get_phone_nums():
 
 def send_reminder(pnum):
     '''Use Twilio to send text message to pnum'''
-    client = twilio.rest.Client(ACCOUNT_SID, AUTH_TOKEN )
+    client = Client(ACCOUNT_SID, AUTH_TOKEN)
 
     message = client.messages \
                     .create(
-                         body="Hi! Reminder: Dont forget to take 5 mins out of your day to write in MySmartJournal. Link:",
+                         body="Hi 👋 from MySmartJournal! 🧠 Reminder: Don't forget to take 5 mins out of your day to write ✍️ in your gratitude journal. 🙏",
                          from_= TWILIO_PNUM,
                          to=('+1'+ pnum)
                      )
@@ -54,9 +54,11 @@ def send_all_reminders():
     to each phone number'''
     
     send_to_all(get_phone_nums())
-    print('Sent all reminders ro users!')
+    print('Sent all reminders to users!')
 
-schedule.every().day.at("17:00").do(send_all_reminders) # UTC time 5pm is 9am PST
+
+# schedule.every().day.at("17:00").do(send_all_reminders) # UTC time 5pm is 9am PST
+schedule.every().minute.do(send_all_reminders)
 
 
 def run_scheduler():
@@ -70,7 +72,7 @@ def main():
     '''Main func. Calls other functions'''
     app = server.app
     app.debug=True
-    model.connect_to_db(app)
+    model.connect_to_db(app, "journals")
     print("connected to db.")
     check_for_credentials(ACCOUNT_SID, AUTH_TOKEN)
     run_scheduler()
@@ -78,9 +80,6 @@ def main():
 
 if __name__ == '__main__':
     main()
-
-
-
 
 
 #To verify people's num on my trial account: twilio.com/user/account/phone-numbers/verified
