@@ -63,7 +63,3 @@ def main(user_id):
         return dates_streaks
 
     return ([], [])
-
-#7th and 9th missing
-# test_dates = [datetime.date(2019, 11, 6), datetime.date(2019, 11, 7), datetime.date(2019, 11, 8), datetime.date(2019, 11, 10), datetime.date(2019, 11, 13), datetime.date(2019, 11, 14)]
-

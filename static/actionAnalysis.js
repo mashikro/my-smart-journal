@@ -59,8 +59,5 @@ $(document).ready(() => {
                                             options: options
                                             });
 
-        });
-        
-        // $('#chartLegend').html(happyChart.generateLegend());
-    
+        });    
     });

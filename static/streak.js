@@ -49,7 +49,7 @@ $(document).ready(() => {
                                         options: options
                                         });
 
-        $('#chartLegend').html(happyChart.generateLegend());
+        // $('#chartLegend').html(happyChart.generateLegend());
         
         });
     });

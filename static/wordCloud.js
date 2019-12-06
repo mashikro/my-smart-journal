@@ -24,8 +24,6 @@ $(document).ready(() => {
     
     $.getJSON("/action.json", (data) => {
        
-       // console.log('are we getting the data', data)
-
        let canvas=document.getElementById('actionChart');
        setupCanvas(canvas);
         WordCloud(canvas, { 
