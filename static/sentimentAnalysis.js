@@ -26,7 +26,7 @@ $(document).ready(() => {
         yAxes: [{
             ticks: {
                 suggestedMin: 0,
-                stepSize: 0.05
+                stepSize: 0.1
             },
             scaleLabel: {
                 display: true,
