@@ -6,7 +6,7 @@ MySmartJournal is a full-stack web app gratitude journal where users can make a 
 
 ## About the Developer
 
-MySmartJournal was authored by Masha Ikromova. Masha studied Neuroscience and Software Engineering at Columbia University and Hackbright Academy respectively. Learn more about the software engineer on Linkedin. 
+MySmartJournal was authored by Masha Ikromova. Masha studied Neuroscience and Software Engineering at Columbia University and Hackbright Academy respectively. This is her first full-stack software. Learn more about the developer on [Linkedin](https://www.linkedin.com/in/mashikro/). 
 
 ## Technologies
 
@@ -29,15 +29,15 @@ MySmartJournal was authored by Masha Ikromova. Masha studied Neuroscience and So
 - Twilio API
 - AWS Comprehend API
 
-MySmartJournal is an app built on a Flask server with a PostgreSQL database, with SQLAlchemy as the ORM. On the front end it uses Jinja2, HTML/CSS, Bootstrap, Javascript (JQuery and AJAX) to interact with the backend. The graphs are rendered using Chart.js and wordcloud2.js. The sentiment analysis is performed using the AWS Comprehend API. User's receive an SMS reminder to write in app daily, which is done using a Twilio API. Server routes are tested using the Python unittest module.
+MySmartJournal is an app built on a Flask server with a PostgreSQL database, with SQLAlchemy as the ORM. On the front end it uses Jinja2, HTML/CSS, Bootstrap, Javascript (JQuery and AJAX) to interact with the backend. The graphs are rendered using Chart.js and wordcloud2.js. The sentiment analysis is powered using the AWS Comprehend API. User's receive an SMS reminder to write in app daily, which is done using a Twilio API. Server routes are tested using the Python unittest module.
 
 ## Features
 
-Making a journal entry
-Viewing all journal entries. Sorting journal entrues by type and time
-Streaks to track habit of journaling
-Happiness graph, directly charting user input
-Word cloud
-sentiment analysis
-twilio sms reminder 
+- Users can make a journal entry.
+- Users can view all journal entries. They can sort them by type and time.
+- Users can view their streak, number of consecutive days of making an entry, which reinforces them to keep journaling.
+- Users can view their happiness graph.
+- Users can learn what makes them happy through the word cloud.
+- Users can learn the sentiment of each entry through Sentiment Analysis 
+- Users can receive text reminders to write in the journal.
 
