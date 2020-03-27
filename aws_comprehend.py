@@ -3,7 +3,7 @@ import model
 # import server
 import json
 
-client = boto3.client('comprehend')
+client = boto3.client(service_name='comprehend', region_name='oregon')
 
 
 def get_query(user_id):
