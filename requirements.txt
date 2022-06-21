@@ -15,7 +15,7 @@ itsdangerous==1.1.0
 Jinja2==2.10.3
 jmespath==0.9.4
 MarkupSafe==1.1.1
-numpy==1.17.3
+numpy==1.22.0
 psycopg2-binary==2.8.4
 pycparser==2.19
 PyJWT==1.7.1
